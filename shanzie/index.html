@@ -1,0 +1,3505 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Kencan Spesial Untuk Shanzie 🎮💌✨</title>
+  <!-- Google Retro Pixel Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --pixel-pink: #ff2a85;
+      --pixel-pink-glow: #ff75b5;
+      --pixel-gold: #ffd700;
+      --pixel-cyan: #00f5d4;
+      --pixel-purple: #7b2cbf;
+      --bg-dark: #0f051d;
+      --card-bg: rgba(26, 11, 46, 0.9);
+      --pixel-border: 4px solid #ff2a85;
+      --pixel-shadow: 6px 6px 0px #000000, inset -4px -4px 0px rgba(0, 0, 0, 0.4);
+      --text-light: #ffffff;
+      --text-muted: #ffccd5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #0f051d;
+      background-image:
+        linear-gradient(rgba(255, 42, 133, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 42, 133, 0.12) 1px, transparent 1px),
+        radial-gradient(circle at 50% 30%, #3c096c 0%, #1a052c 60%, #0f051d 100%);
+      background-size: 24px 24px, 24px 24px, 100% 100%;
+      font-family: 'Pixelify Sans', cursive, sans-serif;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 20px 14px;
+      image-rendering: pixelated;
+    }
+
+    /* CRT Scanlines & Retro Arcade Horizon Grid */
+    .crt-scanlines {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+          rgba(0, 0, 0, 0.22) 50%);
+      background-size: 100% 4px;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .pixel-arcade-grid {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 140px;
+      background:
+        linear-gradient(rgba(0, 245, 212, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 212, 0.2) 1px, transparent 1px);
+      background-size: 32px 16px;
+      border-top: 3px solid #ff2a85;
+      box-shadow: 0 -4px 15px rgba(255, 42, 133, 0.5);
+      z-index: 1;
+      pointer-events: none;
+      mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+      -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    /* Background Canvases */
+    #bgCanvas,
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+    }
+
+    #bgCanvas {
+      z-index: 2;
+    }
+
+    #confettiCanvas {
+      z-index: 99;
+    }
+
+    /* App Container */
+    .app-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* Scene Management */
+    .scene {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .scene.active {
+      display: flex;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Retro Pixel Titles */
+    .title-romantic {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 26px;
+      color: var(--pixel-gold);
+      text-shadow: 3px 3px 0px #000, -2px -2px 0px #ff2a85;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .subtitle-romantic {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--pixel-pink-glow);
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 0px #000;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ff2a85;
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      padding: 6px 14px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    /* Pixel Glass Card */
+    .glass-card {
+      background: var(--card-bg);
+      border: 4px solid var(--pixel-pink);
+      box-shadow: var(--pixel-shadow), 0 0 25px rgba(255, 42, 133, 0.35);
+      border-radius: 4px;
+      padding: 26px 20px;
+      width: 100%;
+      position: relative;
+    }
+
+    /* ---------- SCENE 1: PIXEL ENVELOPE ---------- */
+    .envelope-wrapper {
+      perspective: 1000px;
+      margin: 25px auto 30px;
+      width: 280px;
+      height: 180px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .envelope-3d {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .envelope-back {
+      position: absolute;
+      inset: 0;
+      background: #800f2f;
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0px #000;
+    }
+
+    /* Letter Paper inside Envelope */
+    .letter-preview {
+      position: absolute;
+      top: 10px;
+      left: 5%;
+      width: 90%;
+      height: 90%;
+      background: #fff0f3;
+      border: 3px solid #000;
+      padding: 14px;
+      color: #590d22;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .letter-preview h4 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 13px;
+      color: #ff2a85;
+      margin-bottom: 6px;
+      text-shadow: 1px 1px 0px #000;
+    }
+
+    .letter-preview p {
+      font-size: 13px;
+      font-weight: 700;
+      color: #800f2f;
+    }
+
+    /* Envelope Flaps */
+    .envelope-front-left {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #ff2a85 50%, transparent 50%);
+      z-index: 3;
+      clip-path: polygon(0 0, 0% 100%, 50% 50%);
+    }
+
+    .envelope-front-right {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(-135deg, #ff75b5 50%, transparent 50%);
+      z-index: 3;
+      clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+    }
+
+    .envelope-front-bottom {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, #ff2a85, #ff75b5);
+      z-index: 4;
+      clip-path: polygon(0 100%, 100% 100%, 50% 45%);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(180deg, #ff75b5, #ff2a85);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      transition: transform 0.6s ease-in-out, z-index 0.6s;
+      z-index: 5;
+    }
+
+    /* Retro Pixel Wax Seal Stamp */
+    .wax-seal {
+      position: absolute;
+      top: 55px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background: var(--pixel-gold);
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: heartbeat 1.8s infinite;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    .wax-seal span {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .wax-seal-text {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: #000000;
+      margin-top: 2px;
+    }
+
+    @keyframes heartbeat {
+
+      0%,
+      100% {
+        transform: translateX(-50%) scale(1);
+      }
+
+      50% {
+        transform: translateX(-50%) scale(1.12);
+        box-shadow: 4px 4px 0px #000, 0 0 15px var(--pixel-gold);
+      }
+    }
+
+    /* Open State */
+    .envelope-wrapper.open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-wrapper.open .wax-seal {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.3);
+      pointer-events: none;
+    }
+
+    .envelope-wrapper.open .letter-preview {
+      transform: translateY(-110px) scale(1.05);
+      z-index: 10;
+    }
+
+    .hint-text {
+      font-size: 14px;
+      color: var(--pixel-gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      text-shadow: 2px 2px 0px #000;
+      animation: fadeInOut 2s infinite alternate;
+    }
+
+    @keyframes fadeInOut {
+      from {
+        opacity: 0.6;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* ---------- SCENE 0: PIN LOCK ---------- */
+    .pin-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pin-lock-icon {
+      font-size: 46px;
+      margin-bottom: 8px;
+      animation: floatAnim 2.5s ease-in-out infinite;
+    }
+
+    @keyframes floatAnim {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .pin-dots-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 16px 0 12px;
+    }
+
+    .pin-dot {
+      width: 48px;
+      height: 56px;
+      background: #000000;
+      border: 3px solid #ff2a85;
+      box-shadow: 3px 3px 0px #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 20px;
+      color: var(--pixel-gold);
+      transition: all 0.2s ease;
+    }
+
+    .pin-dot.filled {
+      border-color: var(--pixel-cyan);
+      background: rgba(0, 245, 212, 0.2);
+      box-shadow: 3px 3px 0px #000, 0 0 12px var(--pixel-cyan);
+    }
+
+    .pin-dot.error {
+      border-color: #ff2a85;
+      background: rgba(255, 42, 133, 0.4);
+      animation: shake 0.4s ease-in-out;
+    }
+
+    .pin-dot.success {
+      border-color: var(--pixel-gold);
+      background: rgba(255, 215, 0, 0.3);
+      box-shadow: 3px 3px 0px #000, 0 0 15px var(--pixel-gold);
+    }
+
+    .pin-separator {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 18px;
+      color: var(--text-muted);
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20%,
+      60% {
+        transform: translateX(-8px);
+      }
+
+      40%,
+      80% {
+        transform: translateX(8px);
+      }
+    }
+
+    #clueBtnContainer {
+      margin-top: 4px;
+      display: none;
+      animation: popInClue 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popInClue {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .btn-clue {
+      background: #ffd700;
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      color: #000000;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      padding: 8px 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-clue:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    .pin-hint {
+      font-size: 14px;
+      color: var(--pixel-gold);
+      margin-bottom: 16px;
+      min-height: 22px;
+      font-weight: 700;
+      text-shadow: 2px 2px 0px #000;
+    }
+
+    /* Numpad Keypad Grid */
+    .numpad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+      max-width: 270px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 20;
+    }
+
+    .numpad-btn {
+      background: rgba(255, 42, 133, 0.25);
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      padding: 14px 0;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 16px;
+      color: #ffffff;
+      cursor: pointer;
+      transition: transform 0.1s ease, background 0.1s ease;
+      user-select: none;
+      position: relative;
+      z-index: 20;
+    }
+
+    .numpad-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000;
+      background: var(--pixel-pink);
+    }
+
+    /* Clue Modal Card */
+    .clue-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .clue-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .clue-modal-card {
+      background: #1a052c;
+      border: 4px solid var(--pixel-gold);
+      box-shadow: 8px 8px 0px #000, 0 0 25px rgba(255, 215, 0, 0.4);
+      padding: 24px 20px;
+      max-width: 340px;
+      width: 100%;
+      text-align: center;
+      transform: scale(0.85);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .clue-modal-overlay.active .clue-modal-card {
+      transform: scale(1);
+    }
+
+    .clue-modal-card h3 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 13px;
+      color: var(--pixel-gold);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .clue-modal-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      background: #000000;
+      border: 2px solid var(--pixel-pink);
+      padding: 12px 14px;
+      margin: 10px 0;
+      line-height: 1.4;
+    }
+
+    .btn-close-clue {
+      margin-top: 14px;
+      background: var(--pixel-pink);
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .btn-close-clue:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    /* ---------- SCENE 2: QUESTION & DODGING BUTTON ---------- */
+    .question-avatar {
+      font-size: 54px;
+      margin-bottom: 12px;
+      animation: floatAnim 2.5s ease-in-out infinite;
+    }
+
+    .q-title {
+      font-size: 22px;
+      line-height: 1.4;
+      color: #ffffff;
+      margin-bottom: 24px;
+      font-weight: 700;
+      text-shadow: 2px 2px 0px #000;
+    }
+
+    .q-title span {
+      color: var(--pixel-gold);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      min-height: 70px;
+      width: 100%;
+    }
+
+    .btn-yes {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 13px;
+      color: #ffffff;
+      background: var(--pixel-pink);
+      border: 3px solid #000;
+      padding: 16px 28px;
+      box-shadow: 4px 4px 0px #000, 0 0 15px rgba(255, 42, 133, 0.5);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      z-index: 5;
+      white-space: nowrap;
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.06);
+    }
+
+    .btn-no {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.6);
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      padding: 14px 22px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      z-index: 4;
+      white-space: nowrap;
+    }
+
+    .dodge-note {
+      font-size: 14px;
+      color: var(--pixel-gold);
+      margin-top: 18px;
+      min-height: 20px;
+      font-weight: 700;
+      text-shadow: 2px 2px 0px #000;
+    }
+
+    /* ---------- SCENE 3: REVEAL & COUNTDOWN & POLAROID ---------- */
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 16px 0 22px;
+      width: 100%;
+    }
+
+    .timer-box {
+      background: #000000;
+      border: 3px solid var(--pixel-pink);
+      box-shadow: 3px 3px 0px #000;
+      padding: 8px 10px;
+      min-width: 68px;
+      text-align: center;
+    }
+
+    .timer-val {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 18px;
+      color: var(--pixel-gold);
+      line-height: 1.2;
+    }
+
+    .timer-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--pixel-cyan);
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    /* Polaroid Pixel Frame */
+    .polaroid-card {
+      background: #ffffff;
+      padding: 10px 10px 16px 10px;
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0px #000;
+      transform: rotate(-2deg);
+      transition: transform 0.3s ease;
+      margin: 10px auto 24px;
+      max-width: 270px;
+      color: #000000;
+      position: relative;
+    }
+
+    .polaroid-card:hover {
+      transform: rotate(0deg) scale(1.03);
+    }
+
+    .polaroid-img {
+      width: 100%;
+      height: 170px;
+      background: linear-gradient(135deg, #ff2a85, #3c096c);
+      border: 2px solid #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      gap: 8px;
+    }
+
+    .polaroid-caption {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 13px;
+      color: #800f2f;
+      margin-top: 10px;
+    }
+
+    /* Details Grid */
+    .detail-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 22px;
+    }
+
+    .detail-item {
+      background: #000000;
+      border: 3px solid var(--pixel-pink);
+      box-shadow: 3px 3px 0px #000;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .detail-icon {
+      font-size: 26px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 42, 133, 0.3);
+      border: 2px solid var(--pixel-pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .detail-info h5 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--pixel-gold);
+      margin-bottom: 4px;
+    }
+
+    .detail-info p {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .detail-info small {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Timeline Steps */
+    .timeline-section {
+      width: 100%;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .timeline-title-toggle {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--pixel-gold);
+      background: #000000;
+      border: 3px solid var(--pixel-pink);
+      box-shadow: 3px 3px 0px #000;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .timeline-title-toggle:hover {
+      border-color: var(--pixel-gold);
+      background: rgba(255, 42, 133, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .timeline-title-toggle:active {
+      transform: translate(1px, 1px);
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .timeline-title-text {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .timeline-arrow {
+      font-size: 10px;
+      color: var(--pixel-gold);
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-content-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .timeline-section.open .timeline-content-wrapper {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+
+    .timeline-section.open .timeline-arrow {
+      transform: rotate(180deg);
+    }
+
+    .timeline-content-inner {
+      overflow: hidden;
+      padding-top: 6px;
+    }
+
+    .timeline-card {
+      background: #000000;
+      border: 3px solid var(--pixel-purple);
+      border-left: 5px solid var(--pixel-pink);
+      box-shadow: 3px 3px 0px #000;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .timeline-step {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px;
+      color: var(--pixel-gold);
+      width: 28px;
+      height: 28px;
+      background: var(--pixel-pink);
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .timeline-desc {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    /* Add Custom Agenda Box */
+    .add-agenda-box {
+      margin-top: 14px;
+      background: #000000;
+      border: 3px dashed var(--pixel-gold);
+      padding: 12px;
+    }
+
+    .add-agenda-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--pixel-gold);
+      margin-bottom: 8px;
+    }
+
+    .add-agenda-input-wrap {
+      display: flex;
+      gap: 8px;
+    }
+
+    .agenda-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #ffffff;
+      padding: 8px 12px;
+      color: #ffffff;
+      font-family: 'Pixelify Sans', cursive, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .agenda-input::placeholder {
+      color: rgba(255, 204, 213, 0.6);
+    }
+
+    .btn-add-agenda {
+      background: var(--pixel-pink);
+      border: 2px solid #000;
+      box-shadow: 2px 2px 0px #000;
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      padding: 0 14px;
+      cursor: pointer;
+    }
+
+    .btn-add-agenda:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    /* Sweet Reply Feedback Box */
+    .sweet-reply-box {
+      margin-top: 16px;
+      background: rgba(15, 5, 29, 0.95);
+      border: 3px solid var(--pixel-pink);
+      box-shadow: 4px 4px 0px #000;
+      padding: 12px 14px;
+      border-radius: 4px;
+    }
+
+    .sweet-reply-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8.5px;
+      color: var(--pixel-gold);
+      margin-bottom: 8px;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sweet-reply-textarea {
+      width: 100%;
+      height: 65px;
+      background: #000000;
+      border: 2px solid var(--pixel-cyan);
+      box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      font-family: 'Pixelify Sans', cursive, sans-serif;
+      font-size: 14px;
+      padding: 8px 10px;
+      resize: none;
+      outline: none;
+    }
+
+    .sweet-reply-textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+    }
+
+    .sweet-reply-textarea:focus {
+      border-color: var(--pixel-gold);
+      box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.8), 0 0 8px rgba(255, 215, 0, 0.4);
+    }
+
+    /* Heart Shaped Retro QR Code Section */
+    .qr-heart-section {
+      background: linear-gradient(180deg, #1f0a38 0%, #0f051d 100%);
+      border: 4px solid var(--pixel-pink);
+      box-shadow: 6px 6px 0px #000, inset 0 0 15px rgba(255, 42, 133, 0.3);
+      padding: 18px 14px;
+      margin-top: 20px;
+      text-align: center;
+      position: relative;
+      border-radius: 8px;
+    }
+
+    .qr-heart-badge {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      color: var(--pixel-gold);
+      text-shadow: 2px 2px 0px #000;
+      margin-bottom: 14px;
+    }
+
+    .qr-heart-frame-container {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Heart Shape Mask & Frame for QR Code */
+    .qr-code-box {
+      width: 180px;
+      height: 180px;
+      background: #000000;
+      border: 3px solid var(--pixel-gold);
+      box-shadow: 3px 3px 0px #000, 0 0 15px rgba(255, 215, 0, 0.4);
+      padding: 10px;
+      position: relative;
+      clip-path: path('M 90,165 C 20,110 0,75 0,45 C 0,20 20,0 45,0 C 64,0 80,12 90,26 C 100,12 116,0 135,0 C 160,0 180,20 180,45 C 180,75 160,110 90,165 Z');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #080212;
+    }
+
+    .qr-code-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      image-rendering: pixelated;
+    }
+
+    .qr-center-heart {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      background: #0f051d;
+      border: 2px solid var(--pixel-pink);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 8px var(--pixel-pink);
+      pointer-events: none;
+    }
+
+    .qr-instruction {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .btn-qr-share {
+      background: var(--pixel-purple);
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8.5px;
+      padding: 10px 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-qr-share:hover {
+      background: var(--pixel-pink);
+      transform: translateY(-1px);
+    }
+
+    .btn-qr-share:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    /* Action Buttons Grid */
+    .action-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 18px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0px #000;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-action-primary {
+      background: #25d366;
+      color: #ffffff;
+    }
+
+    .btn-action-secondary {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
+    .btn-action:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .footer-love {
+      margin-top: 22px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 13px;
+      color: var(--pixel-gold);
+      text-shadow: 2px 2px 0px #000;
+    }
+
+    @media (max-width: 400px) {
+      .title-romantic {
+        font-size: 20px;
+      }
+
+      .envelope-wrapper {
+        width: 250px;
+        height: 160px;
+      }
+
+      .timer-box {
+        min-width: 58px;
+        padding: 6px 8px;
+      }
+
+      .timer-val {
+        font-size: 15px;
+      }
+
+      .btn-action {
+        font-size: 9px;
+      }
+    }
+
+    /* ---------- ANIMATED RETRO PIXEL ART ASSETS ---------- */
+    /* Interactive Mascot Pixel Cat Container (Top Right of Card) */
+    .pixel-cat-mascot {
+      position: absolute;
+      top: -40px;
+      right: 14px;
+      z-index: 50;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+      transition: transform 0.3s ease;
+      animation: catFloat 2.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes catFloat {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-6px);
+      }
+    }
+
+    /* Face Elements Visibility based on Mood */
+    .pixel-cat-mascot .face-element {
+      display: none;
+    }
+
+    /* 1. NORMAL MOOD (Default) */
+    .pixel-cat-mascot.mood-normal .eyes-normal,
+    .pixel-cat-mascot.mood-normal .mouth-normal {
+      display: block;
+    }
+
+    /* 2. HAPPY MOOD (Clicked / Yes Button) */
+    .pixel-cat-mascot.mood-happy .eyes-happy,
+    .pixel-cat-mascot.mood-happy .mouth-happy,
+    .pixel-cat-mascot.mood-happy .cheeks-blush {
+      display: block;
+    }
+
+    .pixel-cat-mascot.mood-happy {
+      animation: catHappyBounce 0.35s ease-in-out infinite alternate;
+    }
+
+    @keyframes catHappyBounce {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+
+      100% {
+        transform: translateY(-10px) scale(1.1);
+      }
+    }
+
+    /* 3. SAD MOOD (Dodging No Button) */
+    .pixel-cat-mascot.mood-sad .eyes-sad,
+    .pixel-cat-mascot.mood-sad .mouth-sad,
+    .pixel-cat-mascot.mood-sad .tears-crying {
+      display: block;
+    }
+
+    .pixel-cat-mascot.mood-sad {
+      animation: catSadTremble 0.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes catSadTremble {
+      0% {
+        transform: translateX(-3px) translateY(2px) scale(0.95);
+      }
+
+      100% {
+        transform: translateX(3px) translateY(4px) scale(0.95);
+      }
+    }
+
+    /* Ear Fold when Sad */
+    .pixel-cat-mascot.mood-sad .ear-left {
+      transform: rotate(-14deg);
+      transform-origin: 3px 3px;
+    }
+
+    .pixel-cat-mascot.mood-sad .ear-right {
+      transform: rotate(14deg);
+      transform-origin: 13px 3px;
+    }
+
+    /* Animated Teardrops */
+    .pixel-cat-mascot.mood-sad .tear-drop {
+      animation: tearDropAnim 0.6s linear infinite;
+    }
+
+    @keyframes tearDropAnim {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(4px);
+        opacity: 0.2;
+      }
+    }
+
+    /* Tail Animations */
+    .cat-tail {
+      transform-origin: 13px 13px;
+      animation: tailWag 1.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes tailWag {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(24deg);
+      }
+    }
+
+    .pixel-cat-mascot.mood-happy .cat-tail {
+      animation: tailWagFast 0.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes tailWagFast {
+      0% {
+        transform: rotate(-10deg);
+      }
+
+      100% {
+        transform: rotate(35deg);
+      }
+    }
+
+    .cat-ears {
+      transform-origin: 8px 3px;
+      animation: earTwitch 4.5s infinite;
+    }
+
+    @keyframes earTwitch {
+
+      0%,
+      88%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      92% {
+        transform: rotate(-5deg);
+      }
+
+      95% {
+        transform: rotate(5deg);
+      }
+    }
+
+    /* Animated Walking Pixel Cat at Bottom Horizon */
+    .horizon-walking-cat {
+      position: fixed;
+      bottom: 6px;
+      left: -60px;
+      z-index: 4;
+      pointer-events: none;
+      animation: walkAcross 18s linear infinite;
+    }
+
+    @keyframes walkAcross {
+      0% {
+        left: -60px;
+        transform: scaleX(1);
+      }
+
+      48% {
+        left: calc(100vw + 20px);
+        transform: scaleX(1);
+      }
+
+      50% {
+        left: calc(100vw + 20px);
+        transform: scaleX(-1);
+      }
+
+      98% {
+        left: -60px;
+        transform: scaleX(-1);
+      }
+
+      100% {
+        left: -60px;
+        transform: scaleX(1);
+      }
+    }
+
+    .cat-walk-body {
+      animation: catWalkBounce 0.35s steps(2) infinite;
+    }
+
+    @keyframes catWalkBounce {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-3px);
+      }
+    }
+
+    /* Side Floating Pixel Decor (Heart Balloon & Arcade Controller) */
+    .side-pixel-decor {
+      position: fixed;
+      top: 35%;
+      z-index: 3;
+      pointer-events: none;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .decor-left {
+      left: 15px;
+      animation: floatDecorLeft 4s ease-in-out infinite alternate;
+    }
+
+    .decor-right {
+      right: 15px;
+      animation: floatDecorRight 3.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatDecorLeft {
+      0% {
+        transform: translateY(0) rotate(-3deg);
+      }
+
+      100% {
+        transform: translateY(-16px) rotate(4deg);
+      }
+    }
+
+    @keyframes floatDecorRight {
+      0% {
+        transform: translateY(0) rotate(3deg);
+      }
+
+      100% {
+        transform: translateY(-18px) rotate(-4deg);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .side-pixel-decor {
+        display: none;
+      }
+    }
+
+    /* Top Left BGM Sound Toggle Button */
+    .bgm-toggle-btn {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 100;
+      background: rgba(15, 5, 29, 0.85);
+      border: 3px solid var(--pixel-gold);
+      box-shadow: 3px 3px 0px #000;
+      color: var(--pixel-gold);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      padding: 8px 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bgm-toggle-btn:hover {
+      background: var(--pixel-pink);
+      color: #ffffff;
+      border-color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .bgm-toggle-btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    .bgm-toggle-btn.playing {
+      border-color: var(--pixel-cyan);
+      color: var(--pixel-cyan);
+      box-shadow: 3px 3px 0px #000, 0 0 12px rgba(0, 245, 212, 0.5);
+    }
+
+    /* ---------- AUTHENTIC RETRO ARCADE CABINET MACHINE ---------- */
+    .arcade-cabinet-wrapper {
+      width: 100%;
+      max-width: 420px;
+      margin: 24px auto;
+      position: relative;
+    }
+
+    .arcade-cabinet-frame {
+      background: #120624;
+      border: 5px solid #000000;
+      box-shadow:
+        8px 8px 0px #000000,
+        0 0 25px rgba(255, 42, 133, 0.4),
+        inset 0 0 15px rgba(255, 215, 0, 0.2);
+      border-radius: 12px 12px 6px 6px;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Cabinet Top Marquee Overhang */
+    .arcade-cabinet-top {
+      background: linear-gradient(180deg, #ff2a85 0%, #9d4edd 100%);
+      border-bottom: 4px solid #000000;
+      padding: 10px 14px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .arcade-speaker-grille {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      padding: 0 10px;
+    }
+
+    .speaker-vent {
+      width: 35px;
+      height: 4px;
+      background: #000000;
+      border-radius: 2px;
+    }
+
+    .arcade-marquee-light {
+      background: #0f051d;
+      border: 3px solid var(--pixel-gold);
+      box-shadow: 3px 3px 0px #000, 0 0 12px var(--pixel-gold);
+      padding: 8px 6px;
+    }
+
+    .marquee-text {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--pixel-gold);
+      text-shadow: 2px 2px 0px #000;
+      animation: marqueeGlow 1.8s infinite alternate;
+    }
+
+    @keyframes marqueeGlow {
+      0% {
+        text-shadow: 2px 2px 0px #000, 0 0 5px var(--pixel-gold);
+      }
+
+      100% {
+        text-shadow: 2px 2px 0px #000, 0 0 15px var(--pixel-cyan);
+        color: var(--pixel-cyan);
+      }
+    }
+
+    /* CRT Recessed Monitor Housing */
+    .arcade-monitor-housing {
+      background: #000000;
+      border: 4px solid #1f0a38;
+      margin: 12px 14px 0;
+      padding: 14px;
+      position: relative;
+      border-radius: 8px;
+      box-shadow: inset 0 0 20px #000000;
+    }
+
+    .monitor-bezel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7.5px;
+      color: var(--text-muted);
+    }
+
+    .power-led {
+      width: 8px;
+      height: 8px;
+      background: #00f5d4;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #00f5d4;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .arcade-crt-display {
+      background: #05010a;
+      border: 3px solid var(--pixel-pink);
+      box-shadow: inset 0 0 18px rgba(0, 245, 212, 0.25), 3px 3px 0px #000;
+      padding: 14px 12px;
+      min-height: 140px;
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .arcade-crt-display::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.75;
+    }
+
+    .arcade-crt-display::after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .arcade-screen-text {
+      font-family: 'Pixelify Sans', cursive, monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      position: relative;
+      z-index: 4;
+    }
+
+    /* ---------- ARCADE MINI-GAME STYLES ---------- */
+    .arcade-game-hud {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: var(--pixel-gold);
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed rgba(255, 215, 0, 0.4);
+      position: relative;
+      z-index: 5;
+    }
+
+    .arcade-game-area {
+      position: relative;
+      width: 100%;
+      height: 140px;
+      background: #080212;
+      border: 2px solid rgba(255, 42, 133, 0.4);
+      overflow: hidden;
+      cursor: crosshair;
+      user-select: none;
+      touch-action: none;
+      border-radius: 4px;
+    }
+
+    .game-basket {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      line-height: 1;
+      transition: left 0.08s ease-out;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .falling-heart {
+      position: absolute;
+      font-size: 20px;
+      line-height: 1;
+      top: -24px;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .arcade-game-win-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 5, 29, 0.94);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .arcade-game-win-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .arcade-game-win-overlay h4 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--pixel-gold);
+      text-shadow: 2px 2px 0px #000;
+      animation: marqueeGlow 1s infinite alternate;
+    }
+
+    .arcade-game-win-overlay p {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--pixel-cyan);
+    }
+
+    .btn-deck-nav {
+      background: var(--pixel-purple);
+      border: 2px solid #000;
+      box-shadow: 2px 2px 0px #000;
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-deck-nav:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #000;
+      background: var(--pixel-pink);
+    }
+
+    .arcade-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background: var(--pixel-gold);
+      margin-left: 3px;
+      vertical-align: middle;
+      animation: blinkCursor 0.7s infinite;
+    }
+
+    @keyframes blinkCursor {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* Slanted Control Deck Panel */
+    .arcade-control-deck {
+      background: linear-gradient(180deg, #2b0b4a 0%, #150524 100%);
+      border-top: 4px solid #000000;
+      border-bottom: 4px solid #000000;
+      padding: 12px 16px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .deck-joystick-unit {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .arcade-joystick-stick {
+      position: relative;
+      width: 24px;
+      height: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .joystick-ball {
+      width: 16px;
+      height: 16px;
+      background: radial-gradient(circle at 35% 35%, #ff75b5, #ff2a85 70%, #800f2f 100%);
+      border: 2px solid #000;
+      border-radius: 50%;
+      box-shadow: 2px 2px 0px #000, 0 0 8px rgba(255, 42, 133, 0.6);
+      animation: joystickWiggle 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes joystickWiggle {
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(8deg);
+      }
+    }
+
+    .joystick-shaft {
+      width: 4px;
+      height: 12px;
+      background: #cccccc;
+      border: 1px solid #000;
+    }
+
+    .joystick-base {
+      width: 22px;
+      height: 6px;
+      background: #000000;
+      border-radius: 50%;
+      border: 1px solid #ff2a85;
+    }
+
+    .deck-buttons-unit {
+      display: flex;
+      gap: 6px;
+    }
+
+    .arcade-push-btn {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid #000000;
+      box-shadow: 2px 2px 0px #000000;
+    }
+
+    .push-red {
+      background: var(--pixel-pink);
+    }
+
+    .push-yellow {
+      background: var(--pixel-gold);
+    }
+
+    .push-cyan {
+      background: var(--pixel-cyan);
+    }
+
+    /* Bottom Coin Door */
+    .arcade-coin-door {
+      background: #0a0314;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 3px solid #000;
+    }
+
+    .coin-slots-wrap {
+      display: flex;
+      gap: 10px;
+    }
+
+    .coin-slot {
+      background: #000000;
+      border: 2px solid var(--pixel-gold);
+      padding: 3px 6px;
+      text-align: center;
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .coin-slot-text {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6.5px;
+      color: var(--pixel-gold);
+    }
+
+    .coin-insert-slot {
+      width: 10px;
+      height: 3px;
+      background: #ffffff;
+      margin: 2px auto 0;
+      box-shadow: 0 0 4px var(--pixel-gold);
+    }
+
+    .btn-red {
+      background: #ff2a85;
+    }
+
+    .btn-yellow {
+      background: #ffd700;
+    }
+
+    .btn-blue {
+      background: #00f5d4;
+    }
+
+    .btn-replay-letter {
+      background: var(--pixel-pink);
+      border: 2px solid #000;
+      box-shadow: 2px 2px 0px #000;
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .btn-replay-letter:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #000;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Optional Custom MP3 Audio Tag (Isi src="..." jika ingin ganti dengan file MP3 lagu romantis favorit) -->
+  <audio id="customBgm" loop src=""></audio>
+
+  <!-- Top Left BGM Music Control Button -->
+  <button class="bgm-toggle-btn" id="bgmToggleBtn" onclick="toggleBgm()" title="Turn BGM On/Off">
+    🎵 BGM: OFF
+  </button>
+
+  <!-- Retro CRT Scanlines & Arcade Horizon Grid -->
+  <div class="crt-scanlines"></div>
+  <div class="pixel-arcade-grid"></div>
+
+  <!-- Background Canvases -->
+  <canvas id="bgCanvas"></canvas>
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Side Floating Pixel Art Decor -->
+  <div class="side-pixel-decor decor-left">
+    <svg width="48" height="72" viewBox="0 0 16 24"
+      style="image-rendering: pixelated; filter: drop-shadow(3px 3px 0px #000);">
+      <!-- Pixel Heart Balloon -->
+      <rect x="4" y="1" width="3" height="2" fill="#ff2a85" />
+      <rect x="9" y="1" width="3" height="2" fill="#ff2a85" />
+      <rect x="3" y="3" width="10" height="4" fill="#ff2a85" />
+      <rect x="4" y="7" width="8" height="2" fill="#ff2a85" />
+      <rect x="6" y="9" width="4" height="2" fill="#ff2a85" />
+      <rect x="7" y="11" width="2" height="1" fill="#ff75b5" />
+      <!-- String -->
+      <rect x="7" y="12" width="1" height="3" fill="#ffd700" />
+      <rect x="8" y="15" width="1" height="3" fill="#ffd700" />
+      <rect x="7" y="18" width="1" height="3" fill="#ffd700" />
+    </svg>
+  </div>
+
+  <div class="side-pixel-decor decor-right">
+    <svg width="48" height="48" viewBox="0 0 16 16"
+      style="image-rendering: pixelated; filter: drop-shadow(3px 3px 0px #000);">
+      <!-- Pixel Arcade Controller -->
+      <rect x="1" y="4" width="14" height="8" fill="#7b2cbf" />
+      <rect x="2" y="3" width="12" height="10" fill="#7b2cbf" />
+      <rect x="3" y="6" width="3" height="1" fill="#00f5d4" />
+      <rect x="4" y="5" width="1" height="3" fill="#00f5d4" />
+      <rect x="11" y="6" width="2" height="2" fill="#ff2a85" />
+      <rect x="9" y="8" width="2" height="2" fill="#ffd700" />
+    </svg>
+  </div>
+
+  <!-- Animated Walking Pixel Cat at Bottom Horizon -->
+  <div class="horizon-walking-cat">
+    <div class="cat-walk-body">
+      <svg width="36" height="36" viewBox="0 0 16 16"
+        style="image-rendering: pixelated; filter: drop-shadow(2px 2px 0px #000);">
+        <rect x="3" y="2" width="2" height="2" fill="#ffd700" />
+        <rect x="10" y="2" width="2" height="2" fill="#ffd700" />
+        <rect x="2" y="4" width="11" height="6" fill="#ffd700" />
+        <rect x="4" y="5" width="2" height="2" fill="#000" />
+        <rect x="9" y="5" width="2" height="2" fill="#000" />
+        <rect x="6" y="7" width="3" height="1" fill="#ff2a85" />
+        <rect x="3" y="10" width="10" height="4" fill="#ffd700" />
+        <rect x="4" y="14" width="2" height="2" fill="#ff2a85" />
+        <rect x="10" y="14" width="2" height="2" fill="#ff2a85" />
+        <g class="cat-tail">
+          <rect x="13" y="9" width="3" height="1" fill="#ffd700" />
+          <rect x="15" y="7" width="1" height="2" fill="#ffd700" />
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Interactive Animated Pixel Cat Mascot -->
+    <div class="pixel-cat-mascot mood-normal" id="pixelCatContainer" onclick="meowCat()" title="Klik aku Sayang! 🐾">
+      <svg width="56" height="56" viewBox="0 0 16 16"
+        style="image-rendering: pixelated; filter: drop-shadow(3px 3px 0px #000);">
+        <!-- Ears -->
+        <g class="cat-ears">
+          <rect class="ear-left" x="3" y="1" width="2" height="3" fill="#ff75b5" />
+          <rect x="4" y="2" width="1" height="1" fill="#ffffff" />
+          <rect class="ear-right" x="11" y="1" width="2" height="3" fill="#ff75b5" />
+          <rect x="11" y="2" width="1" height="1" fill="#ffffff" />
+        </g>
+        <!-- Head -->
+        <rect x="3" y="4" width="10" height="7" fill="#ff75b5" />
+        <rect x="2" y="5" width="12" height="5" fill="#ff75b5" />
+        <rect x="4" y="5" width="8" height="5" fill="#fff0f3" />
+
+        <!-- Blushing Cheeks (Happy) -->
+        <g class="face-element cheeks-blush">
+          <rect x="3" y="8" width="2" height="1" fill="#ff2a85" />
+          <rect x="11" y="8" width="2" height="1" fill="#ff2a85" />
+        </g>
+
+        <!-- 1. NORMAL EYES -->
+        <g class="face-element eyes-normal">
+          <rect x="4" y="6" width="2" height="2" fill="#0f051d" />
+          <rect x="4" y="6" width="1" height="1" fill="#ffffff" />
+          <rect x="10" y="6" width="2" height="2" fill="#0f051d" />
+          <rect x="10" y="6" width="1" height="1" fill="#ffffff" />
+        </g>
+
+        <!-- 2. HAPPY EYES ^ ^ -->
+        <g class="face-element eyes-happy">
+          <rect x="4" y="6" width="3" height="1" fill="#0f051d" />
+          <rect x="4" y="5" width="1" height="1" fill="#0f051d" />
+          <rect x="6" y="5" width="1" height="1" fill="#0f051d" />
+
+          <rect x="9" y="6" width="3" height="1" fill="#0f051d" />
+          <rect x="9" y="5" width="1" height="1" fill="#0f051d" />
+          <rect x="11" y="5" width="1" height="1" fill="#0f051d" />
+        </g>
+
+        <!-- 3. SAD / CRYING EYES T T -->
+        <g class="face-element eyes-sad">
+          <rect x="4" y="5" width="2" height="1" fill="#0f051d" />
+          <rect x="5" y="6" width="1" height="2" fill="#0f051d" />
+          <rect x="10" y="5" width="2" height="1" fill="#0f051d" />
+          <rect x="10" y="6" width="1" height="2" fill="#0f051d" />
+        </g>
+        <!-- Animated Teardrops -->
+        <g class="face-element tears-crying">
+          <rect class="tear-drop" x="4" y="7" width="1" height="2" fill="#00f5d4" />
+          <rect class="tear-drop" x="11" y="7" width="1" height="2" fill="#00f5d4" />
+        </g>
+
+        <!-- Whiskers -->
+        <rect x="0" y="7" width="2" height="1" fill="#ffd700" />
+        <rect x="14" y="7" width="2" height="1" fill="#ffd700" />
+        <rect x="1" y="9" width="2" height="1" fill="#ffd700" />
+        <rect x="13" y="9" width="2" height="1" fill="#ffd700" />
+
+        <!-- MOUTHS -->
+        <!-- Normal Mouth -->
+        <rect class="face-element mouth-normal" x="7" y="8" width="2" height="1" fill="#ff2a85" />
+
+        <!-- Happy Smile Mouth :3 -->
+        <g class="face-element mouth-happy">
+          <rect x="6" y="8" width="4" height="2" fill="#ff2a85" />
+          <rect x="7" y="9" width="2" height="1" fill="#ffd700" />
+        </g>
+
+        <!-- Sad Frown Mouth :( -->
+        <g class="face-element mouth-sad">
+          <rect x="6" y="9" width="4" height="1" fill="#ff2a85" />
+          <rect x="6" y="10" width="1" height="1" fill="#ff2a85" />
+          <rect x="9" y="10" width="1" height="1" fill="#ff2a85" />
+        </g>
+
+        <!-- Body -->
+        <rect x="4" y="11" width="8" height="4" fill="#ff75b5" />
+        <rect x="5" y="11" width="6" height="5" fill="#ffffff" />
+        <!-- Paws -->
+        <rect x="4" y="15" width="2" height="1" fill="#ffd700" />
+        <rect x="10" y="15" width="2" height="1" fill="#ffd700" />
+        <!-- Tail -->
+        <g class="cat-tail">
+          <rect x="12" y="11" width="3" height="1" fill="#ff75b5" />
+          <rect x="14" y="9" width="1" height="2" fill="#ff75b5" />
+          <rect x="14" y="8" width="1" height="1" fill="#ffd700" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- ==================== SCENE 0: PIN LOCK ==================== -->
+    <div class="scene" id="scene-pin">
+      <div class="glass-card pin-card">
+        <div class="pin-lock-icon">🔐✨</div>
+        <div class="badge">Akses Secret Pin</div>
+        <h1 class="title-romantic">Wellcome Shanzie</h1>
+        <p class="subtitle-romantic">Masukkan Kode Kunci Rahasia (DD-MM) 💌</p>
+
+        <div class="pin-dots-wrap" id="pinDotsWrap">
+          <div class="pin-dot" id="dot0"></div>
+          <div class="pin-dot" id="dot1"></div>
+          <div class="pin-separator">-</div>
+          <div class="pin-dot" id="dot2"></div>
+          <div class="pin-dot" id="dot3"></div>
+        </div>
+
+        <!-- Interactive Clue Button (Initially hidden, pops up on wrong PIN entry) -->
+        <div id="clueBtnContainer">
+          <button class="btn-clue" onclick="toggleClueModal()">
+            <span>💡</span> mau clue gaa???
+          </button>
+        </div>
+
+        <p class="pin-hint" id="pinHint"></p>
+
+        <!-- Keypad Grid -->
+        <div class="numpad-grid">
+          <button class="numpad-btn" onclick="pressPin('1')">1</button>
+          <button class="numpad-btn" onclick="pressPin('2')">2</button>
+          <button class="numpad-btn" onclick="pressPin('3')">3</button>
+          <button class="numpad-btn" onclick="pressPin('4')">4</button>
+          <button class="numpad-btn" onclick="pressPin('5')">5</button>
+          <button class="numpad-btn" onclick="pressPin('6')">6</button>
+          <button class="numpad-btn" onclick="pressPin('7')">7</button>
+          <button class="numpad-btn" onclick="pressPin('8')">8</button>
+          <button class="numpad-btn" onclick="pressPin('9')">9</button>
+          <button class="numpad-btn" style="opacity: 0.6;" onclick="clearPin()">C</button>
+          <button class="numpad-btn" onclick="pressPin('0')">0</button>
+          <button class="numpad-btn" onclick="backspacePin()">⌫</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Clue Modal Card -->
+    <div class="clue-modal-overlay" id="clueModal" onclick="closeClueModal(event)">
+      <div class="clue-modal-card" onclick="event.stopPropagation()">
+        <div class="clue-modal-icon">💡✨</div>
+        <h3>clue nyaa 🤫</h3>
+        <div class="clue-modal-text">
+          "Tanggal di mana kita gajadi dinner"
+        </div>
+        <small style="color: var(--text-muted); font-size: 12px; display: block; margin-top: 8px;">Format PIN: DD-MM
+          (Hari - Bulan)</small>
+        <button class="btn-close-clue" onclick="closeClueModal()">Oke, Paham! 🙈</button>
+      </div>
+    </div>
+
+    <!-- ==================== SCENE 1: ENVELOPE ==================== -->
+    <div class="scene active" id="scene-envelope">
+      <div class="badge">✨ Special Secret Message ✨</div>
+      <h1 class="title-romantic">Haloo sayang</h1>
+      <p class="subtitle-romantic">Buka Amplopnya...</p>
+
+      <div class="envelope-wrapper" id="envelopeWrap" onclick="openEnvelope()">
+        <div class="envelope-3d">
+          <div class="envelope-back"></div>
+          <div class="letter-preview">
+            <h4>For My Love 💖</h4>
+            <p>Ketuk untuk membaca selengkapnya...</p>
+          </div>
+          <div class="envelope-front-left"></div>
+          <div class="envelope-front-right"></div>
+          <div class="envelope-front-bottom"></div>
+          <div class="envelope-flap"></div>
+          <div class="wax-seal">
+            <span>💌</span>
+            <div class="wax-seal-text">OPEN</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="hint-text">👉 Sentuh segel amplop emas di atas 👈</p>
+    </div>
+
+    <!-- ==================== SCENE 2: QUESTION ==================== -->
+    <div class="scene" id="scene-question">
+      <div class="glass-card">
+        <div class="question-avatar">💕💕</div>
+        <div class="badge">Pertanyaan Penting</div>
+        <h2 class="q-title">
+          Sayangg,<br>
+          <span>kamu mau ngedate sama aku ga?</span>
+        </h2>
+
+        <div class="btn-group" id="btnGroup">
+          <button class="btn-yes" id="btnYes" onclick="handleYesClick()">mau banget!!💖</button>
+          <button class="btn-no" id="btnNo">ga..</button>
+        </div>
+
+        <p class="dodge-note" id="dodgeNote"></p>
+      </div>
+    </div>
+
+    <!-- ==================== SCENE 3: REVEAL ==================== -->
+    <div class="scene" id="scene-reveal">
+      <div class="glass-card">
+        <div class="reveal-header">
+          <div class="badge">🎉 Yaaay, Finalized! 🎉</div>
+          <h1 class="title-romantic" style="font-size: 24px;">It's a Date!</h1>
+          <p class="subtitle-romantic">Catat waktunya yaa.. aku udah siapin khusus buat kamu</p>
+        </div>
+
+        <!-- Live Countdown -->
+        <div class="countdown-container">
+          <div class="timer-box">
+            <div class="timer-val" id="countDays">00</div>
+            <div class="timer-label">Hari</div>
+          </div>
+          <div class="timer-box">
+            <div class="timer-val" id="countHours">00</div>
+            <div class="timer-label">Jam</div>
+          </div>
+          <div class="timer-box">
+            <div class="timer-val" id="countMins">00</div>
+            <div class="timer-label">Menit</div>
+          </div>
+          <div class="timer-box">
+            <div class="timer-val" id="countSecs">00</div>
+            <div class="timer-label">Detik</div>
+          </div>
+        </div>
+
+        <!-- Polaroid Memory Frame -->
+        <div class="polaroid-card">
+          <div class="polaroid-img">
+            <span style="font-size: 44px;">🎡✨🍜</span>
+            <span style="font-weight: 700; font-size: 13px; font-family: 'Press Start 2P', monospace;">Our Special
+              Date</span>
+          </div>
+          <div class="polaroid-caption">S & A</div>
+        </div>
+
+        <!-- Authentic Retro 8-Bit Arcade Machine Cabinet -->
+        <div class="arcade-cabinet-wrapper">
+          <div class="arcade-cabinet-frame">
+
+            <!-- Top Overhang Marquee -->
+            <div class="arcade-cabinet-top">
+              <div class="arcade-speaker-grille">
+                <div class="speaker-vent"></div>
+                <div class="speaker-vent"></div>
+              </div>
+              <div class="arcade-marquee-light">
+                <div class="marquee-text">🕹️ LOVE LETTER ARCADE 💌</div>
+              </div>
+            </div>
+
+            <!-- Recessed CRT Monitor Housing -->
+            <div class="arcade-monitor-housing">
+              <div class="monitor-bezel-header">
+                <div><span class="power-led"></span>CRT HIGH-RES MONITOR</div>
+                <div>STAGE 1</div>
+              </div>
+
+              <div class="arcade-crt-display">
+                <!-- Mini-Game Area -->
+                <div class="arcade-game-area" id="arcadeGameArea" onmousemove="handleGameTouch(event)"
+                  ontouchmove="handleGameTouch(event)">
+                  <div class="arcade-game-hud">
+                    <span>STAGE 1: CATCH 5 HEARTS</span>
+                    <span>SCORE: <span id="arcadeScoreVal" style="color: var(--pixel-gold);">0</span>/5</span>
+                  </div>
+                  <div class="game-basket" id="gameBasket">🧺</div>
+                  <div class="arcade-game-win-overlay" id="arcadeGameOverlay">
+                    <h4>🎉 STAGE CLEARED! 🏆</h4>
+                    <p>Membuka Surat Rahasia...</p>
+                  </div>
+                </div>
+
+                <!-- Letter Typewriter Container (Hidden during mini-game) -->
+                <div id="arcadeLetterDisplay" style="display: none;">
+                  <span class="arcade-screen-text" id="arcadeLetterText"></span><span class="arcade-cursor"
+                    id="arcadeCursor"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slanted Arcade Control Deck -->
+            <div class="arcade-control-deck">
+              <div class="deck-joystick-unit">
+                <div class="arcade-joystick-stick">
+                  <div class="joystick-ball"></div>
+                  <div class="joystick-shaft"></div>
+                  <div class="joystick-base"></div>
+                </div>
+                <div style="font-family: 'Press Start 2P', monospace; font-size: 7.5px; color: var(--pixel-gold);">1
+                  PLAYER</div>
+              </div>
+
+              <!-- Interactive Navigation Buttons for Mini-Game -->
+              <div class="deck-buttons-unit">
+                <button class="btn-deck-nav" onclick="moveBasket(-1)" title="Geser Kiri">◀ KIRI</button>
+                <button class="btn-deck-nav" onclick="moveBasket(1)" title="Geser Kanan">KANAN ▶</button>
+              </div>
+            </div>
+
+            <!-- Bottom Coin Door & Game / Letter Switch Buttons -->
+            <div class="arcade-coin-door">
+              <div class="coin-slots-wrap">
+                <div class="coin-slot">
+                  <div class="coin-slot-text">25¢</div>
+                  <div class="coin-insert-slot"></div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 6px;">
+                <button class="btn-replay-letter" onclick="initArcadeMiniGame()"
+                  style="background: var(--pixel-purple);">🎮 MAIN GAME</button>
+                <button class="btn-replay-letter" onclick="switchToLetterDisplay()">✉️ SURAT</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Detail Grid -->
+        <div class="detail-grid">
+          <div class="detail-item">
+            <div class="detail-icon">📅</div>
+            <div class="detail-info">
+              <h5>Tanggal</h5>
+              <p>Minggu, 6 September 2026</p>
+              <small>Pukul 11:00 WIB - Selesai</small>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-icon">📍</div>
+            <div class="detail-info">
+              <h5>Lokasi</h5>
+              <p>Karawaci Supermall</p>
+              <small><a href="https://maps.google.com/?q=Karawaci+Supermall" target="_blank"
+                  style="color: var(--pixel-gold); text-decoration: underline;">Buka Rute di Google Maps ➔</a></small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Items (Collapsible Accordion) -->
+        <div class="timeline-section" id="timelineSection">
+          <div class="timeline-title-toggle" onclick="toggleTimeline()">
+            <div class="timeline-title-text">
+              <span>📍 Our Plan</span>
+              <small
+                style="font-size: 8.5px; color: var(--pixel-pink-glow); font-family: 'Pixelify Sans', sans-serif; font-weight: bold;">(Klik
+                untuk lihat ✨)</small>
+            </div>
+            <div class="timeline-arrow" id="timelineArrow">▼</div>
+          </div>
+          <div class="timeline-content-wrapper">
+            <div class="timeline-content-inner">
+              <div class="timeline-card">
+                <div class="timeline-step">1</div>
+                <div class="timeline-desc">🕹️ <b>Playing at Timezone</b></div>
+              </div>
+              <div class="timeline-card">
+                <div class="timeline-step">2</div>
+                <div class="timeline-desc">🍜 <b>Lunch:</b> Mau makan udonn</div>
+              </div>
+              <div class="timeline-card">
+                <div class="timeline-step">3</div>
+                <div class="timeline-desc">📸 <b>Photobooth</b></div>
+              </div>
+              <div class="timeline-card">
+                <div class="timeline-step">4</div>
+                <div class="timeline-desc">✨ <b>...and much more! 🎁💖</b></div>
+              </div>
+
+              <!-- Add Custom Agenda Box -->
+              <div class="add-agenda-box">
+                <div class="add-agenda-title">✨ Ada agenda lain buat kita Sayang?</div>
+                <div class="add-agenda-input-wrap">
+                  <input type="text" id="customAgendaInput" class="agenda-input"
+                    placeholder="Tulis disini agendanyaa..." maxlength="70"
+                    onkeydown="if(event.key==='Enter') addCustomAgenda()">
+                  <button class="btn-add-agenda" id="btnAddAgenda" onclick="addCustomAgenda()">+ Tambah</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Special Sweet Reply Feedback Box -->
+        <div class="sweet-reply-box">
+          <div class="sweet-reply-title"><span>💌</span> Feedbacknya kakaaa..</div>
+          <textarea id="sweetReplyInput" class="sweet-reply-textarea"
+            placeholder="Ketik disiniii terus klik konfirmasi WA ya" maxlength="250"
+            oninput="setupActionLinks()"></textarea>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-grid">
+          <a id="waReplyBtn" href="#" target="_blank" class="btn-action btn-action-primary">
+            <span>💬</span> Kirim Konfirmasi ke WhatsApp
+          </a>
+          <a id="gCalBtn" href="#" target="_blank" class="btn-action btn-action-secondary">
+            <span>📅</span> Tambahkan ke Google Calendar
+          </a>
+        </div>
+
+        <!-- Heart Shaped Retro QR Code Card Section -->
+        <div class="qr-heart-section">
+          <div class="qr-heart-badge">💖 SCAN QR UNDANGAN KENCAN 💖</div>
+          <div class="qr-heart-frame-container">
+            <div class="qr-code-box">
+              <img id="qrCodeImg" src="" alt="QR Code Undangan Shanzie" />
+              <div class="qr-center-heart">💌</div>
+            </div>
+          </div>
+          <p class="qr-instruction">Scan QR Code berbentuk love ini pakai HP lain untuk langsung membuka undangan kencan
+            💖</p>
+          <div style="margin-top: 10px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn-qr-share" onclick="copyInvitationLink()">
+              <span>📋</span> Salin Link
+            </button>
+            <button class="btn-qr-share" onclick="downloadQrImage()" style="background: var(--pixel-pink);">
+              <span>📥</span> Download Gambar QR
+            </button>
+          </div>
+        </div>
+
+        <div class="footer-love">Can't wait to see you🥰</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript Retro Arcade Engine -->
+  <script>
+    /* ===================================================
+       1. RETRO 8-BIT CHIPTUNE SOUND SYNTHESIZER
+       =================================================== */
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) audioCtx = new AudioCtx();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function playChiptuneBeep() {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(1760, audioCtx.currentTime + 0.03);
+
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.07);
+      } catch (e) { }
+    }
+
+    function playChiptuneChime() {
+      try {
+        initAudio();
+        const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98, 2093.00]; // C5 to C7 Level-Up Arpeggio
+        notes.forEach((freq, i) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.06);
+
+          gain.gain.setValueAtTime(0, audioCtx.currentTime + i * 0.06);
+          gain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + i * 0.06 + 0.01);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.06 + 0.35);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(audioCtx.currentTime + i * 0.06);
+          osc.stop(audioCtx.currentTime + i * 0.06 + 0.38);
+        });
+      } catch (e) { }
+    }
+
+    function playChiptuneBuzzer() {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(80, audioCtx.currentTime + 0.22);
+
+        gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.22);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.23);
+      } catch (e) { }
+    }
+
+    /* ===================================================
+       2. BACKGROUND 8-BIT PARTICLES (Pixel Hearts & Stars)
+       =================================================== */
+    const bgCanvas = document.getElementById('bgCanvas');
+    const bgCtx = bgCanvas.getContext('2d');
+    let bgParticles = [];
+
+    function resizeBgCanvas() {
+      bgCanvas.width = window.innerWidth;
+      bgCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeBgCanvas);
+    resizeBgCanvas();
+
+    class BgParticle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * bgCanvas.width;
+        this.y = bgCanvas.height + 20;
+        this.size = 12 + Math.random() * 16;
+        this.speedY = 0.6 + Math.random() * 1.4;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.opacity = 0.3 + Math.random() * 0.5;
+        this.type = Math.random() > 0.4 ? 'heart' : 'star';
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        if (this.y < -30) this.reset();
+      }
+      draw() {
+        bgCtx.save();
+        bgCtx.globalAlpha = this.opacity;
+        if (this.type === 'heart') {
+          // Authentic 8-bit Pixel Heart Matrix
+          bgCtx.fillStyle = '#ff2a85';
+          const s = Math.max(2, Math.floor(this.size / 5)); // pixel block size
+          const px = this.x;
+          const py = this.y;
+          const heartMap = [
+            [0, 1, 0, 1, 0],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [0, 1, 1, 1, 0],
+            [0, 0, 1, 0, 0]
+          ];
+          for (let r = 0; r < 5; r++) {
+            for (let c = 0; c < 5; c++) {
+              if (heartMap[r][c]) {
+                bgCtx.fillRect(px + c * s, py + r * s, s, s);
+              }
+            }
+          }
+        } else {
+          // Authentic 8-bit Pixel Star Cross
+          bgCtx.fillStyle = '#ffd700';
+          const s = Math.max(2, Math.floor(this.size / 4));
+          const px = this.x;
+          const py = this.y;
+          bgCtx.fillRect(px + s, py, s, s);
+          bgCtx.fillRect(px, py + s, s * 3, s);
+          bgCtx.fillRect(px + s, py + s * 2, s, s);
+        }
+        bgCtx.restore();
+      }
+    }
+
+    for (let i = 0; i < 30; i++) {
+      const p = new BgParticle();
+      p.y = Math.random() * bgCanvas.height;
+      bgParticles.push(p);
+    }
+
+    function animateBg() {
+      bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+      bgParticles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateBg);
+    }
+    animateBg();
+
+    /* ===================================================
+       3. 8-BIT RETRO CONFETTI ENGINE
+       =================================================== */
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    let confettiItems = [];
+
+    function resizeConfettiCanvas() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeConfettiCanvas);
+    resizeConfettiCanvas();
+
+    class ConfettiPiece {
+      constructor(x, y) {
+        this.x = x !== undefined ? x : Math.random() * confettiCanvas.width;
+        this.y = y !== undefined ? y : -20;
+        this.size = 8 + Math.random() * 12;
+        this.vx = (Math.random() - 0.5) * 12;
+        this.vy = y !== undefined ? -6 - Math.random() * 12 : 2 + Math.random() * 5;
+        this.gravity = 0.25;
+        this.drag = 0.96;
+        this.colors = ['#ff2a85', '#ffd700', '#00f5d4', '#ffffff', '#7b2cbf'];
+        this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+        this.shape = Math.random() > 0.3 ? 'heart' : 'rect';
+        this.opacity = 1;
+      }
+      update() {
+        this.vx *= this.drag;
+        this.vy += this.gravity;
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.y > confettiCanvas.height + 50) this.opacity = 0;
+      }
+      draw() {
+        if (this.opacity <= 0) return;
+        confettiCtx.save();
+        confettiCtx.globalAlpha = this.opacity;
+        confettiCtx.fillStyle = this.color;
+
+        if (this.shape === 'heart') {
+          confettiCtx.font = `${this.size}px monospace`;
+          confettiCtx.fillText('💖', this.x, this.y);
+        } else {
+          confettiCtx.fillRect(this.x, this.y, this.size, this.size);
+        }
+        confettiCtx.restore();
+      }
+    }
+
+    function launchBurst(x, y, count = 70) {
+      for (let i = 0; i < count; i++) {
+        confettiItems.push(new ConfettiPiece(x, y));
+      }
+    }
+
+    function animateConfetti() {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      for (let i = confettiItems.length - 1; i >= 0; i--) {
+        const c = confettiItems[i];
+        c.update();
+        c.draw();
+        if (c.opacity <= 0) confettiItems.splice(i, 1);
+      }
+      requestAnimationFrame(animateConfetti);
+    }
+    animateConfetti();
+
+    /* ===================================================
+       4. PIN LOCK & ENVELOPE FLOW (Secret PIN: 23-03)
+       =================================================== */
+    const TARGET_PIN = "2303";
+    let currentPin = "";
+    let pinLocked = false;
+    let pinVerified = false;
+
+    function openEnvelope() {
+      initAudio();
+      if (!pinVerified) {
+        playChiptuneBeep();
+        document.getElementById('scene-envelope').classList.remove('active');
+        document.getElementById('scene-pin').classList.add('active');
+        return;
+      }
+      playChiptuneChime();
+      const wrap = document.getElementById('envelopeWrap');
+      wrap.classList.add('open');
+
+      const rect = wrap.getBoundingClientRect();
+      launchBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 50);
+
+      setTimeout(() => {
+        document.getElementById('scene-envelope').classList.remove('active');
+        const scene2 = document.getElementById('scene-question');
+        scene2.classList.add('active');
+      }, 900);
+    }
+
+    function pressPin(digit) {
+      if (pinLocked || currentPin.length >= 4) return;
+      initAudio();
+      playChiptuneBeep();
+      currentPin += digit;
+      updatePinDisplay();
+
+      if (currentPin.length === 4) {
+        checkPin();
+      }
+    }
+
+    function backspacePin() {
+      if (pinLocked || currentPin.length === 0) return;
+      playChiptuneBeep();
+      currentPin = currentPin.slice(0, -1);
+      updatePinDisplay();
+    }
+
+    function clearPin() {
+      if (pinLocked) return;
+      playChiptuneBeep();
+      currentPin = "";
+      updatePinDisplay();
+    }
+
+    function updatePinDisplay() {
+      for (let i = 0; i < 4; i++) {
+        const dot = document.getElementById(`dot${i}`);
+        if (i < currentPin.length) {
+          dot.textContent = currentPin[i];
+          dot.classList.add('filled');
+        } else {
+          dot.textContent = '';
+          dot.classList.remove('filled', 'error', 'success');
+        }
+      }
+    }
+
+    function toggleClueModal() {
+      initAudio();
+      playChiptuneBeep();
+      const modal = document.getElementById('clueModal');
+      if (modal) modal.classList.add('active');
+    }
+
+    function closeClueModal(e) {
+      if (e && e.target !== e.currentTarget && !e.target.classList.contains('btn-close-clue')) return;
+      initAudio();
+      playChiptuneBeep();
+      const modal = document.getElementById('clueModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function checkPin() {
+      const hint = document.getElementById('pinHint');
+      const wrap = document.getElementById('pinDotsWrap');
+
+      if (currentPin === TARGET_PIN) {
+        pinLocked = true;
+        pinVerified = true;
+        playChiptuneChime();
+        setCatMood('happy');
+
+        for (let i = 0; i < 4; i++) {
+          document.getElementById(`dot${i}`).classList.add('success');
+        }
+        hint.textContent = "🔓 PIN Benar! Membuka amplop...";
+        hint.style.color = "var(--pixel-gold)";
+
+        const rect = wrap.getBoundingClientRect();
+        launchBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 50);
+
+        setTimeout(() => {
+          document.getElementById('scene-pin').classList.remove('active');
+          document.getElementById('scene-envelope').classList.add('active');
+          openEnvelope();
+        }, 750);
+
+      } else {
+        playChiptuneBuzzer();
+        playChiptuneSadMeow();
+        setCatMood('sad');
+
+        clearTimeout(catMoodTimer);
+        catMoodTimer = setTimeout(() => {
+          if (!document.getElementById('scene-reveal').classList.contains('active')) {
+            setCatMood('normal');
+          }
+        }, 2200);
+
+        for (let i = 0; i < 4; i++) {
+          document.getElementById(`dot${i}`).classList.add('error');
+        }
+        hint.textContent = "❌ Ups, PIN salah sayang! Coba klik clue yang baru muncul 😉";
+        hint.style.color = "var(--pixel-pink)";
+
+        // Reveal clue button after entering wrong PIN
+        const clueBtnContainer = document.getElementById('clueBtnContainer');
+        if (clueBtnContainer) {
+          clueBtnContainer.style.display = 'block';
+        }
+
+        setTimeout(() => {
+          currentPin = "";
+          updatePinDisplay();
+          hint.textContent = "";
+        }, 1400);
+      }
+    }
+
+    // Keyboard typing support for PIN
+    document.addEventListener('keydown', (e) => {
+      const scenePin = document.getElementById('scene-pin');
+      if (scenePin && scenePin.classList.contains('active')) {
+        if (e.key >= '0' && e.key <= '9') {
+          pressPin(e.key);
+        } else if (e.key === 'Backspace') {
+          backspacePin();
+        }
+      }
+    });
+
+    /* ===================================================
+       5. QUESTION DODGING BUTTON & REVEAL
+       =================================================== */
+    const btnNo = document.getElementById('btnNo');
+    const btnYes = document.getElementById('btnYes');
+    const dodgeNote = document.getElementById('dodgeNote');
+    const notes = [
+      "Eits gak kena 😜",
+      "Gabakal bisa🏃💨",
+      "Udah klik yang pink aja🥹💖",
+      "Masih maksa yaa",
+      "Udah deh, pilih 'mau banget!!💖' aja ya ✨"
+    ];
+    let noteIdx = 0;
+    let yesScale = 1;
+
+    function dodge(e) {
+      if (e) e.preventDefault();
+      playChiptuneBeep();
+      playChiptuneSadMeow();
+      setCatMood('sad');
+
+      clearTimeout(catMoodTimer);
+      catMoodTimer = setTimeout(() => {
+        if (!document.getElementById('scene-reveal').classList.contains('active')) {
+          setCatMood('normal');
+        }
+      }, 2200);
+
+      const group = document.getElementById('btnGroup');
+      const groupRect = group.getBoundingClientRect();
+      const btnRect = btnNo.getBoundingClientRect();
+
+      const maxX = groupRect.width - btnRect.width;
+      const maxY = groupRect.height - btnRect.height;
+
+      const randomX = (Math.random() * maxX) - (maxX / 2);
+      const randomY = (Math.random() * 60) - 30;
+
+      btnNo.style.position = 'relative';
+      btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+      dodgeNote.textContent = notes[noteIdx % notes.length];
+      noteIdx++;
+
+      yesScale += 0.08;
+      if (yesScale > 1.6) yesScale = 1.6;
+      btnYes.style.transform = `scale(${yesScale})`;
+    }
+
+    btnNo.addEventListener('mouseenter', dodge);
+    btnNo.addEventListener('touchstart', dodge, { passive: false });
+    btnNo.addEventListener('click', dodge);
+
+    btnYes.addEventListener('mouseenter', () => {
+      if (!document.getElementById('scene-reveal').classList.contains('active')) {
+        setCatMood('happy');
+      }
+    });
+
+    btnYes.addEventListener('mouseleave', () => {
+      if (!document.getElementById('scene-reveal').classList.contains('active')) {
+        setCatMood('normal');
+      }
+    });
+
+    function handleYesClick() {
+      setCatMood('happy');
+      playChiptuneChime();
+      const rect = btnYes.getBoundingClientRect();
+      launchBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 120);
+
+      setTimeout(() => launchBurst(window.innerWidth * 0.2, window.innerHeight * 0.3, 60), 300);
+      setTimeout(() => launchBurst(window.innerWidth * 0.8, window.innerHeight * 0.3, 60), 600);
+
+      document.getElementById('scene-question').classList.remove('active');
+      document.getElementById('scene-reveal').classList.add('active');
+
+      startCountdown();
+      setupActionLinks();
+      setTimeout(initArcadeMiniGame, 600);
+    }
+
+    /* ===================================================
+       6. LIVE COUNTDOWN & ACTION LINKS
+       =================================================== */
+    function startCountdown() {
+      const targetDate = new Date('September 6, 2026 11:00:00').getTime();
+
+      function update() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          document.getElementById('countDays').textContent = '00';
+          document.getElementById('countHours').textContent = '00';
+          document.getElementById('countMins').textContent = '00';
+          document.getElementById('countSecs').textContent = '00';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('countDays').textContent = days < 10 ? '0' + days : days;
+        document.getElementById('countHours').textContent = hours < 10 ? '0' + hours : hours;
+        document.getElementById('countMins').textContent = mins < 10 ? '0' + mins : mins;
+        document.getElementById('countSecs').textContent = secs < 10 ? '0' + secs : secs;
+      }
+
+      update();
+      setInterval(update, 1000);
+    }
+
+    function toggleTimeline() {
+      initAudio();
+      playChiptuneBeep();
+      const section = document.getElementById('timelineSection');
+      if (section) {
+        section.classList.toggle('open');
+      }
+    }
+
+    let customAgendas = [];
+    let timelineCount = 4;
+
+    function addCustomAgenda() {
+      const input = document.getElementById('customAgendaInput');
+      const val = input.value.trim();
+      if (!val) {
+        input.focus();
+        playChiptuneBeep();
+        return;
+      }
+
+      timelineCount++;
+      customAgendas.push(val);
+
+      const card = document.createElement('div');
+      card.className = 'timeline-card';
+      card.style.animation = 'fadeInOut 0.4s ease both';
+      card.innerHTML = `
+      <div class="timeline-step">${timelineCount}</div>
+      <div class="timeline-desc">💖 <b>Agenda Impian Shanzie:</b> ${val}</div>
+    `;
+
+      const box = document.querySelector('.add-agenda-box');
+      box.parentNode.insertBefore(card, box);
+
+      input.value = '';
+      playChiptuneChime();
+
+      const btnBtn = document.getElementById('btnAddAgenda');
+      if (btnBtn) {
+        const rect = btnBtn.getBoundingClientRect();
+        launchBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 35);
+      }
+
+      setupActionLinks();
+    }
+
+    function setupActionLinks() {
+      let customText = "";
+      if (customAgendas.length > 0) {
+        customText += "%0A%0A✨ Aku juga nambahin agenda impianku ya:%0A" + customAgendas.map((a, i) => `${i + 1}. ${a}`).join('%0A');
+      }
+
+      const sweetNoteEl = document.getElementById('sweetReplyInput');
+      const sweetNoteVal = sweetNoteEl ? sweetNoteEl.value.trim() : "";
+      if (sweetNoteVal) {
+        customText += "%0A%0A💌 Pesan Balasan Manisku:%0A\"" + encodeURIComponent(sweetNoteVal) + "\"";
+      }
+
+      const waMsg = encodeURIComponent("Hai sayang! Aku mau banget ngedate sama kamu hari Minggu, 6 September nanti! 🥰✨ Nggak sabar main ke Timezone & makan udon bareng 💖") + customText;
+      document.getElementById('waReplyBtn').href = `https://wa.me/6282317580600?text=${waMsg}`;
+
+      const title = encodeURIComponent("Kencan Spesial sama Shanzie 💖");
+      let detailsStr = "Rencana kencan seru: Main arcade di Timezone & makan udon di Marugame Karawaci Supermall! 🥰";
+      if (customAgendas.length > 0) {
+        detailsStr += " + Agenda Tambahan Shanzie: " + customAgendas.join(', ');
+      }
+      if (sweetNoteVal) {
+        detailsStr += " | Pesan Balasan: " + sweetNoteVal;
+      }
+      const details = encodeURIComponent(detailsStr);
+      const location = encodeURIComponent("Karawaci Supermall, Tangerang");
+      const dates = "20260906T040000Z/20260906T090000Z";
+      document.getElementById('gCalBtn').href = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`;
+
+      updateQrCode();
+    }
+
+    function updateQrCode() {
+      const qrImg = document.getElementById('qrCodeImg');
+      if (!qrImg) return;
+      const currentUrl = window.location.href;
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=ff2a85&bgcolor=080212&data=${encodeURIComponent(currentUrl)}`;
+      qrImg.src = qrApiUrl;
+    }
+
+    function copyInvitationLink() {
+      initAudio();
+      playChiptuneChime();
+      const currentUrl = window.location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(currentUrl).then(() => {
+          alert('📋 Link Undangan Kencan berhasil disalin!');
+        }).catch(() => {
+          prompt('Salin link undangan ini:', currentUrl);
+        });
+      } else {
+        prompt('Salin link undangan ini:', currentUrl);
+      }
+    }
+
+    function downloadQrImage() {
+      initAudio();
+      playChiptuneChime();
+      const qrImg = document.getElementById('qrCodeImg');
+      if (!qrImg || !qrImg.src) return;
+      const a = document.createElement('a');
+      a.href = qrImg.src;
+      a.download = 'QR-Undangan-Shanzie.png';
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    document.addEventListener('DOMContentLoaded', updateQrCode);
+    setTimeout(updateQrCode, 500);
+
+    /* ===================================================
+       PIXEL CAT INTERACTIVE MOOD & SOUND SYNTHESIZER
+       =================================================== */
+    let currentCatMood = 'normal';
+    let catMoodTimer = null;
+
+    function setCatMood(mood) {
+      currentCatMood = mood;
+      const cat = document.getElementById('pixelCatContainer');
+      if (!cat) return;
+      cat.classList.remove('mood-normal', 'mood-happy', 'mood-sad');
+      cat.classList.add(`mood-${mood}`);
+    }
+
+    function playChiptuneMeow() {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+
+        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(950, audioCtx.currentTime + 0.1);
+        osc.frequency.exponentialRampToValueAtTime(450, audioCtx.currentTime + 0.28);
+
+        gain.gain.setValueAtTime(0.14, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.31);
+      } catch (e) { }
+    }
+
+    function playChiptuneSadMeow() {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+
+        // Sad whimpering slide pitch 380Hz -> 180Hz
+        osc.frequency.setValueAtTime(380, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.35);
+
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.36);
+      } catch (e) { }
+    }
+
+    function meowCat() {
+      playChiptuneMeow();
+      setCatMood('happy');
+      const cat = document.getElementById('pixelCatContainer');
+      if (cat) {
+        const rect = cat.getBoundingClientRect();
+        launchBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 22);
+      }
+      clearTimeout(catMoodTimer);
+      catMoodTimer = setTimeout(() => {
+        if (!document.getElementById('scene-reveal').classList.contains('active')) {
+          setCatMood('normal');
+        }
+      }, 2500);
+    }
+
+    /* ===================================================
+       DEEPLY ROMANTIC MUSIC BOX & CUSTOM MP3 BGM ENGINE
+       =================================================== */
+    let isBgmPlaying = false;
+    let bgmTimer = null;
+    let bgmStep = 0;
+
+    const M_NOTES = {
+      C3: 130.81, E3: 164.81, F3: 174.61, G3: 196.00, A3: 220.00, B3: 246.94,
+      C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00, B4: 493.88,
+      C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99, A5: 880.00, B5: 987.77,
+      C6: 1046.50, D6: 1174.66, E6: 1318.51, REST: 0
+    };
+
+    // Deeply Romantic Ballad Sequence ("Can't Help Falling in Love" & "Canon in D" Acoustic Music Box)
+    const romanticBgmSequence = [
+      // Verse: "Wise men say, only fools rush in..."
+      { note: M_NOTES.G4, bass: M_NOTES.C3, duration: 0.5 },
+      { note: M_NOTES.C5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.G5, bass: 0, duration: 1.1 },
+
+      { note: M_NOTES.B5, bass: M_NOTES.E3, duration: 0.5 },
+      { note: M_NOTES.A5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.G5, bass: M_NOTES.A3, duration: 0.5 },
+      { note: M_NOTES.A5, bass: 0, duration: 1.1 },
+
+      { note: M_NOTES.F5, bass: M_NOTES.F3, duration: 0.5 },
+      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.D5, bass: M_NOTES.C3, duration: 0.5 },
+      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.F5, bass: M_NOTES.G3, duration: 0.5 },
+      { note: M_NOTES.G5, bass: 0, duration: 1.1 },
+
+      { note: M_NOTES.E5, bass: M_NOTES.C3, duration: 0.5 },
+      { note: M_NOTES.D5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.C5, bass: M_NOTES.G3, duration: 1.3 },
+
+      // Chorus: "But I can't help falling in love with you..."
+      { note: M_NOTES.G4, bass: M_NOTES.C3, duration: 0.5 },
+      { note: M_NOTES.C5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.G5, bass: 0, duration: 1.1 },
+
+      { note: M_NOTES.B5, bass: M_NOTES.E3, duration: 0.5 },
+      { note: M_NOTES.A5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.G5, bass: M_NOTES.A3, duration: 0.5 },
+      { note: M_NOTES.A5, bass: 0, duration: 1.1 },
+
+      { note: M_NOTES.F5, bass: M_NOTES.F3, duration: 0.5 },
+      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.D5, bass: M_NOTES.C3, duration: 0.5 },
+      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.F5, bass: M_NOTES.G3, duration: 0.5 },
+      { note: M_NOTES.G5, bass: 0, duration: 1.1 },
+
+      { note: M_NOTES.E5, bass: M_NOTES.C3, duration: 0.5 },
+      { note: M_NOTES.D5, bass: M_NOTES.G3, duration: 0.5 },
+      { note: M_NOTES.C5, bass: M_NOTES.C3, duration: 1.5 },
+
+      // Bridge: "Like a river flows, surely to the sea..."
+      { note: M_NOTES.E5, bass: M_NOTES.E3, duration: 0.4 },
+      { note: M_NOTES.B5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.G5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.E5, bass: M_NOTES.A3, duration: 0.4 },
+      { note: M_NOTES.B5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.G5, bass: 0, duration: 0.4 },
+
+      { note: M_NOTES.E5, bass: M_NOTES.F3, duration: 0.4 },
+      { note: M_NOTES.C6, bass: 0, duration: 0.4 },
+      { note: M_NOTES.A5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.D5, bass: M_NOTES.G3, duration: 0.4 },
+      { note: M_NOTES.B5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.G5, bass: 0, duration: 0.4 },
+
+      // Outro / Resolving Cadence
+      { note: M_NOTES.C6, bass: M_NOTES.F3, duration: 0.5 },
+      { note: M_NOTES.B5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.A5, bass: M_NOTES.G3, duration: 0.5 },
+      { note: M_NOTES.G5, bass: 0, duration: 0.5 },
+      { note: M_NOTES.E5, bass: M_NOTES.C3, duration: 0.6 },
+      { note: M_NOTES.D5, bass: 0, duration: 0.6 },
+      { note: M_NOTES.C5, bass: M_NOTES.C3, duration: 1.8 }
+    ];
+
+    function startBgm() {
+      if (isBgmPlaying) return;
+      initAudio();
+      isBgmPlaying = true;
+      bgmStep = 0;
+      updateBgmBtn();
+
+      const customAudio = document.getElementById('customBgm');
+      if (customAudio && customAudio.src && customAudio.src !== window.location.href) {
+        customAudio.play().catch(() => {
+          playNextBgmNote();
+        });
+      } else {
+        playNextBgmNote();
+      }
+    }
+
+    function stopBgm() {
+      isBgmPlaying = false;
+      clearTimeout(bgmTimer);
+      const customAudio = document.getElementById('customBgm');
+      if (customAudio) {
+        customAudio.pause();
+      }
+      updateBgmBtn();
+    }
+
+    function toggleBgm() {
+      initAudio();
+      if (isBgmPlaying) {
+        stopBgm();
+      } else {
+        startBgm();
+      }
+    }
+
+    function autoStartBgm() {
+      if (!isBgmPlaying) {
+        startBgm();
+      }
+    }
+    document.addEventListener('click', autoStartBgm, { once: true });
+    document.addEventListener('touchstart', autoStartBgm, { once: true });
+
+    function updateBgmBtn() {
+      const btn = document.getElementById('bgmToggleBtn');
+      if (btn) {
+        if (isBgmPlaying) {
+          btn.innerHTML = '🎵 BGM: ON';
+          btn.classList.add('playing');
+        } else {
+          btn.innerHTML = '🔇 BGM: OFF';
+          btn.classList.remove('playing');
+        }
+      }
+    }
+
+    function playNextBgmNote() {
+      if (!isBgmPlaying) return;
+      try {
+        const item = romanticBgmSequence[bgmStep % romanticBgmSequence.length];
+        bgmStep++;
+
+        if (item.note > 0) {
+          // Main Melody Oscillator (Sine - Warm Music Box)
+          const osc1 = audioCtx.createOscillator();
+          const gain1 = audioCtx.createGain();
+          osc1.type = 'sine';
+          osc1.frequency.setValueAtTime(item.note, audioCtx.currentTime);
+
+          gain1.gain.setValueAtTime(0.08, audioCtx.currentTime);
+          gain1.gain.exponentialRampToValueAtTime(0.0002, audioCtx.currentTime + item.duration * 1.8);
+
+          osc1.connect(gain1);
+          gain1.connect(audioCtx.destination);
+          osc1.start();
+          osc1.stop(audioCtx.currentTime + item.duration * 1.9);
+
+          // Subtle Sparkle Harmonic Bell (+1 Octave)
+          const osc2 = audioCtx.createOscillator();
+          const gain2 = audioCtx.createGain();
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(item.note * 2, audioCtx.currentTime);
+
+          gain2.gain.setValueAtTime(0.02, audioCtx.currentTime);
+          gain2.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + item.duration * 1.2);
+
+          osc2.connect(gain2);
+          gain2.connect(audioCtx.destination);
+          osc2.start();
+          osc2.stop(audioCtx.currentTime + item.duration * 1.3);
+        }
+
+        // Deep Warm Accompaniment Bass (Triangle)
+        if (item.bass > 0) {
+          const bassOsc = audioCtx.createOscillator();
+          const bassGain = audioCtx.createGain();
+          bassOsc.type = 'triangle';
+          bassOsc.frequency.setValueAtTime(item.bass, audioCtx.currentTime);
+
+          bassGain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+          bassGain.gain.exponentialRampToValueAtTime(0.0005, audioCtx.currentTime + 1.8);
+
+          bassOsc.connect(bassGain);
+          bassGain.connect(audioCtx.destination);
+          bassOsc.start();
+          bassOsc.stop(audioCtx.currentTime + 1.9);
+        }
+
+        bgmTimer = setTimeout(playNextBgmNote, item.duration * 1000);
+      } catch (e) { }
+    }
+
+    /* ===================================================
+       TYPEWRITER ARCADE LETTER ENGINE
+       =================================================== */
+    /* 
+       👇 TULIS / EDIT SURAT KAMU DI SINI:
+       Gunakan \n untuk membuat baris baru.
+    */
+    const MY_LOVE_LETTER = `Halooo... 💌✨
+
+Makasih ya udah mau jalan sama aku haha seneng banget loh aku ngeplan ini semoga suka ya sama yang aku buat.
+
+Seru-seruan kita nanti, habisin waktu bareng, dengerin cerita kamu! Aku mau kamu happy seng, aku mau kamu tau aku pasti ada buat kamu
+
+I love you so much!💖`;
+
+    let letterTypeIndex = 0;
+    let letterTypeTimer = null;
+
+    function startArcadeLetterTypewriter() {
+      const container = document.getElementById('arcadeLetterText');
+      const cursor = document.getElementById('arcadeCursor');
+      if (!container) return;
+
+      container.textContent = '';
+      letterTypeIndex = 0;
+      clearTimeout(letterTypeTimer);
+
+      if (cursor) cursor.style.display = 'inline-block';
+
+      function typeNextChar() {
+        if (letterTypeIndex < MY_LOVE_LETTER.length) {
+          const char = MY_LOVE_LETTER.charAt(letterTypeIndex);
+          container.textContent += char;
+          letterTypeIndex++;
+
+          if (char !== ' ' && char !== '\n') {
+            playChiptuneKeyClick();
+          }
+
+          letterTypeTimer = setTimeout(typeNextChar, 45);
+        }
+      }
+
+      typeNextChar();
+    }
+
+    function replayArcadeLetter() {
+      initAudio();
+      playChiptuneBeep();
+      startArcadeLetterTypewriter();
+    }
+
+    function playChiptuneKeyClick() {
+      try {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(1200 + Math.random() * 200, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.02);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.025);
+      } catch (e) { }
+    }
+
+    /* ===================================================
+       ARCADE MINI-GAME: HEARTS CATCHER ENGINE
+       =================================================== */
+    let gameScore = 0;
+    const TARGET_SCORE = 5;
+    let gameBasketX = 50;
+    let fallingItems = [];
+    let gameAnimationId = null;
+    let isMiniGameActive = false;
+
+    function initArcadeMiniGame() {
+      initAudio();
+      playChiptuneBeep();
+      gameScore = 0;
+      gameBasketX = 50;
+
+      const area = document.getElementById('arcadeGameArea');
+      if (area) {
+        const existingHearts = area.querySelectorAll('.falling-heart');
+        existingHearts.forEach(h => h.remove());
+      }
+      fallingItems = [];
+      isMiniGameActive = true;
+
+      document.getElementById('arcadeScoreVal').textContent = '0';
+      document.getElementById('arcadeGameOverlay').classList.remove('active');
+      document.getElementById('arcadeGameArea').style.display = 'block';
+      document.getElementById('arcadeLetterDisplay').style.display = 'none';
+
+      updateBasketPosition();
+      spawnFallingHeart();
+
+      if (gameAnimationId) cancelAnimationFrame(gameAnimationId);
+      runArcadeGameLoop();
+    }
+
+    function moveBasket(dir) {
+      if (!isMiniGameActive) return;
+      initAudio();
+      gameBasketX += dir * 14;
+      if (gameBasketX < 8) gameBasketX = 8;
+      if (gameBasketX > 92) gameBasketX = 92;
+      updateBasketPosition();
+    }
+
+    function updateBasketPosition() {
+      const basket = document.getElementById('gameBasket');
+      if (basket) {
+        basket.style.left = `${gameBasketX}%`;
+      }
+    }
+
+    function handleGameTouch(e) {
+      if (!isMiniGameActive) return;
+      const area = document.getElementById('arcadeGameArea');
+      if (!area) return;
+      const rect = area.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      let relX = ((clientX - rect.left) / rect.width) * 100;
+      if (relX < 8) relX = 8;
+      if (relX > 92) relX = 92;
+      gameBasketX = relX;
+      updateBasketPosition();
+    }
+
+    function spawnFallingHeart() {
+      if (!isMiniGameActive) return;
+      const area = document.getElementById('arcadeGameArea');
+      if (!area) return;
+
+      const emojis = ['💖', '✨', '💝', '⭐', '💌'];
+      const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+      const posX = 10 + Math.random() * 80;
+
+      const heartEl = document.createElement('div');
+      heartEl.className = 'falling-heart';
+      heartEl.textContent = emoji;
+      heartEl.style.left = `${posX}%`;
+
+      area.appendChild(heartEl);
+      fallingItems.push({
+        el: heartEl,
+        x: posX,
+        y: -20,
+        speed: 1.5 + Math.random() * 1.5
+      });
+    }
+
+    function runArcadeGameLoop() {
+      if (!isMiniGameActive) return;
+
+      const area = document.getElementById('arcadeGameArea');
+      const areaHeight = area ? area.clientHeight : 140;
+
+      for (let i = fallingItems.length - 1; i >= 0; i--) {
+        const item = fallingItems[i];
+        item.y += item.speed;
+        item.el.style.top = `${item.y}px`;
+
+        if (item.y >= areaHeight - 34 && item.y <= areaHeight - 6) {
+          if (Math.abs(item.x - gameBasketX) < 14) {
+            playChiptuneBeep();
+            gameScore++;
+            document.getElementById('arcadeScoreVal').textContent = gameScore;
+            item.el.remove();
+            fallingItems.splice(i, 1);
+
+            if (gameScore >= TARGET_SCORE) {
+              triggerMiniGameWin();
+              return;
+            }
+            continue;
+          }
+        }
+
+        if (item.y > areaHeight + 10) {
+          item.el.remove();
+          fallingItems.splice(i, 1);
+        }
+      }
+
+      if (Math.random() < 0.04 && fallingItems.length < 3) {
+        spawnFallingHeart();
+      }
+
+      gameAnimationId = requestAnimationFrame(runArcadeGameLoop);
+    }
+
+    function triggerMiniGameWin() {
+      isMiniGameActive = false;
+      playChiptuneChime();
+
+      const overlay = document.getElementById('arcadeGameOverlay');
+      if (overlay) overlay.classList.add('active');
+
+      const area = document.getElementById('arcadeGameArea');
+      if (area) {
+        const rect = area.getBoundingClientRect();
+        launchBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 40);
+      }
+
+      setTimeout(() => {
+        switchToLetterDisplay();
+      }, 1500);
+    }
+
+    function switchToLetterDisplay() {
+      isMiniGameActive = false;
+      if (gameAnimationId) cancelAnimationFrame(gameAnimationId);
+
+      document.getElementById('arcadeGameArea').style.display = 'none';
+      document.getElementById('arcadeLetterDisplay').style.display = 'block';
+
+      startArcadeLetterTypewriter();
+    }
+  </script>
+</body>
+
+</html>
