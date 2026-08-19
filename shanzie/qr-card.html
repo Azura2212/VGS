@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kartu Spesial QR Code Love untuk Shanzie 💖💌</title>
+  <!-- Google Retro Pixel Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet">
+  <!-- QRCode.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --pixel-pink: #ff2a85;
+      --pixel-pink-glow: #ff75b5;
+      --pixel-gold: #ffd700;
+      --pixel-cyan: #00f5d4;
+      --pixel-purple: #7b2cbf;
+      --bg-dark: #0f051d;
+      --card-bg: rgba(26, 11, 46, 0.95);
+      --pixel-border: 4px solid #ff2a85;
+      --text-light: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--bg-dark);
+      background-image:
+        linear-gradient(rgba(255, 42, 133, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 42, 133, 0.12) 1px, transparent 1px),
+        radial-gradient(circle at 50% 30%, #3c096c 0%, #1a052c 60%, #0f051d 100%);
+      background-size: 24px 24px, 24px 24px, 100% 100%;
+      font-family: 'Pixelify Sans', cursive, sans-serif;
+      color: var(--text-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      image-rendering: pixelated;
+    }
+
+    /* Controls Panel */
+    .controls-panel {
+      background: rgba(15, 5, 29, 0.9);
+      border: 3px solid var(--pixel-cyan);
+      box-shadow: 0 0 15px rgba(0, 245, 212, 0.4);
+      border-radius: 12px;
+      padding: 16px 24px;
+      margin-bottom: 25px;
+      max-width: 550px;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .controls-panel label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--pixel-cyan);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .url-input {
+      flex: 1;
+      background: #1a0b2e;
+      border: 2px solid var(--pixel-pink);
+      color: #ffffff;
+      padding: 10px 14px;
+      font-family: 'Pixelify Sans', cursive;
+      font-size: 16px;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    .url-input:focus {
+      border-color: var(--pixel-gold);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .btn {
+      background: linear-gradient(180deg, #ff2a85 0%, #b80053 100%);
+      border: 3px solid var(--pixel-gold);
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      text-shadow: 1px 1px 0px #000;
+      box-shadow: 3px 3px 0px #000;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0px #000;
+      background: linear-gradient(180deg, #ff549d 0%, #d80063 100%);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    /* Retro Card Container */
+    .card-container {
+      width: 420px;
+      background: var(--card-bg);
+      border: 6px solid var(--pixel-gold);
+      box-shadow: 
+        0 0 30px rgba(255, 42, 133, 0.6),
+        inset 0 0 20px rgba(123, 44, 191, 0.8),
+        8px 8px 0px #000;
+      border-radius: 16px;
+      padding: 30px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Pixel Corner Accents */
+    .card-container::before,
+    .card-container::after {
+      content: '✦';
+      position: absolute;
+      font-size: 20px;
+      color: var(--pixel-gold);
+      text-shadow: 0 0 8px var(--pixel-gold);
+    }
+    .card-container::before { top: 10px; left: 14px; }
+    .card-container::after { top: 10px; right: 14px; }
+
+    .card-header {
+      margin-bottom: 20px;
+    }
+
+    .card-subtitle {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--pixel-cyan);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 8px rgba(0, 245, 212, 0.6);
+    }
+
+    .card-title {
+      font-size: 26px;
+      color: #ffffff;
+      text-shadow: 
+        2px 2px 0px var(--pixel-pink),
+        4px 4px 0px #000;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    /* Heart QR Frame Wrapper */
+    .heart-qr-wrapper {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SVG Heart Frame Background */
+    .heart-svg-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 15px rgba(255, 42, 133, 0.8));
+    }
+
+    /* Inner QR Container centered inside heart */
+    .qr-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -46%);
+      width: 160px;
+      height: 160px;
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 8px;
+      border: 3px solid var(--pixel-pink);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+
+    .qr-box img, .qr-box canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .card-footer-text {
+      font-size: 18px;
+      color: var(--text-light);
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .card-footer-text span {
+      color: var(--pixel-pink-glow);
+      font-weight: bold;
+    }
+
+    .scan-badge {
+      display: inline-block;
+      margin-top: 15px;
+      background: rgba(255, 42, 133, 0.2);
+      border: 2px solid var(--pixel-pink);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--pixel-gold);
+      box-shadow: 0 0 10px rgba(255, 42, 133, 0.4);
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 42, 133, 0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 42, 133, 0.8), 0 0 10px var(--pixel-gold); }
+    }
+
+    /* Print Stylesheet */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      .controls-panel, .no-print {
+        display: none !important;
+      }
+
+      .card-container {
+        border-color: #ff2a85 !important;
+        box-shadow: none !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+        margin: 0 auto;
+      }
+
+      .card-title, .card-subtitle, .card-footer-text {
+        color: #000000 !important;
+        text-shadow: none !important;
+      }
+
+      .scan-badge {
+        color: #ff2a85 !important;
+        background: #fff0f5 !important;
+        border-color: #ff2a85 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Controls Panel for user input -->
+  <div class="controls-panel no-print">
+    <label>💌 INPUT LINK WEBSITE UNTUK QR CODE 💌</label>
+    <div class="input-group">
+      <input type="text" id="targetUrl" class="url-input" 
+        value="http://localhost:8080/undangan-kencan-shannzie.html" 
+        placeholder="Masukkan link web (misal: https://undangan-shanzie.netlify.app)">
+      <button class="btn" onclick="updateQR()">UPDATE QR</button>
+    </div>
+    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+      <button class="btn" onclick="window.print()" style="background: linear-gradient(180deg, #00f5d4 0%, #00a896 100%); color: #0f051d;">
+        🖨️ CETAK / SAVE PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- The Love QR Printable Card -->
+  <div class="card-container" id="printableCard">
+    <div class="card-header">
+      <div class="card-subtitle">✨ VIRTUAL GIFT FOR SHANZIE ✨</div>
+      <h1 class="card-title">YOU HAVE A SPECIAL INVITATION! 🎮💌</h1>
+    </div>
+
+    <div class="heart-qr-wrapper">
+      <!-- SVG Pixel Heart Frame -->
+      <svg class="heart-svg-bg" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Glowing Heart Path -->
+        <path d="M 150 270 
+                 C 20 180, 10 90, 85 45 
+                 C 125 20, 145 40, 150 60 
+                 C 155 40, 175 20, 215 45 
+                 C 290 90, 280 180, 150 270 Z" 
+              fill="url(#heartGrad)" 
+              stroke="#ff2a85" 
+              stroke-width="8" 
+              stroke-linejoin="round" />
+        
+        <!-- Inner Accent Frame -->
+        <path d="M 150 250 
+                 C 35 170, 25 95, 90 55 
+                 C 125 35, 142 52, 150 68 
+                 C 158 52, 175 35, 210 55 
+                 C 275 95, 265 170, 150 250 Z" 
+              fill="none" 
+              stroke="#ffd700" 
+              stroke-width="3" 
+              stroke-dasharray="8 6" />
+
+        <defs>
+          <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ff2a85" />
+            <stop offset="50%" stop-color="#7b2cbf" />
+            <stop offset="100%" stop-color="#3c096c" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- Scannable QR Code Box -->
+      <div class="qr-box">
+        <div id="qrcode"></div>
+      </div>
+    </div>
+
+    <p class="card-footer-text">
+      Buka kameramu lalu scan QR Code di atas<br>
+      untuk membuka <span>Undangan Kencan Rahasia! 💖</span>
+    </p>
+
+    <div class="scan-badge">
+      📲 SCAN ME WITH YOUR PHONE
+    </div>
+  </div>
+
+  <script>
+    let qrcodeObj = null;
+
+    function generateQRCode(url) {
+      const qrContainer = document.getElementById("qrcode");
+      qrContainer.innerHTML = ""; // Clear existing
+
+      qrcodeObj = new QRCode(qrContainer, {
+        text: url,
+        width: 140,
+        height: 140,
+        colorDark: "#0f051d",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    function updateQR() {
+      const inputUrl = document.getElementById("targetUrl").value.trim();
+      if (!inputUrl) {
+        alert("Masukkan URL terlebih dahulu!");
+        return;
+      }
+      generateQRCode(inputUrl);
+    }
+
+    // Initialize on load
+    window.addEventListener("DOMContentLoaded", () => {
+      const initialUrl = document.getElementById("targetUrl").value;
+      generateQRCode(initialUrl);
+    });
+  </script>
+</body>
+
+</html>
