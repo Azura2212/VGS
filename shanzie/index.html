@@ -49,7 +49,7 @@
       justify-content: center;
       overflow-x: hidden;
       position: relative;
-      padding: 20px 14px;
+      padding: 60px 14px 40px;
       image-rendering: pixelated;
     }
 
@@ -108,7 +108,7 @@
       z-index: 10;
       width: 100%;
       max-width: 480px;
-      margin: 0 auto;
+      margin: 10px auto 0;
     }
 
     /* Scene Management */
@@ -366,6 +366,9 @@
       font-size: 46px;
       margin-bottom: 8px;
       animation: floatAnim 2.5s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     @keyframes floatAnim {
@@ -603,6 +606,9 @@
       font-size: 54px;
       margin-bottom: 12px;
       animation: floatAnim 2.5s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .q-title {
@@ -990,109 +996,7 @@
       box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.8), 0 0 8px rgba(255, 215, 0, 0.4);
     }
 
-    /* Heart Shaped Retro QR Code Section */
-    .qr-heart-section {
-      background: linear-gradient(180deg, #1f0a38 0%, #0f051d 100%);
-      border: 4px solid var(--pixel-pink);
-      box-shadow: 6px 6px 0px #000, inset 0 0 15px rgba(255, 42, 133, 0.3);
-      padding: 18px 14px;
-      margin-top: 20px;
-      text-align: center;
-      position: relative;
-      border-radius: 8px;
-    }
 
-    .qr-heart-badge {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 9px;
-      color: var(--pixel-gold);
-      text-shadow: 2px 2px 0px #000;
-      margin-bottom: 14px;
-    }
-
-    .qr-heart-frame-container {
-      position: relative;
-      width: 220px;
-      height: 220px;
-      margin: 0 auto 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Heart Shape Mask & Frame for QR Code */
-    .qr-code-box {
-      width: 180px;
-      height: 180px;
-      background: #000000;
-      border: 3px solid var(--pixel-gold);
-      box-shadow: 3px 3px 0px #000, 0 0 15px rgba(255, 215, 0, 0.4);
-      padding: 10px;
-      position: relative;
-      clip-path: path('M 90,165 C 20,110 0,75 0,45 C 0,20 20,0 45,0 C 64,0 80,12 90,26 C 100,12 116,0 135,0 C 160,0 180,20 180,45 C 180,75 160,110 90,165 Z');
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #080212;
-    }
-
-    .qr-code-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      image-rendering: pixelated;
-    }
-
-    .qr-center-heart {
-      position: absolute;
-      top: 48%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 18px;
-      background: #0f051d;
-      border: 2px solid var(--pixel-pink);
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 8px var(--pixel-pink);
-      pointer-events: none;
-    }
-
-    .qr-instruction {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-
-    .btn-qr-share {
-      background: var(--pixel-purple);
-      border: 3px solid #000;
-      box-shadow: 3px 3px 0px #000;
-      color: #ffffff;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 8.5px;
-      padding: 10px 14px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-qr-share:hover {
-      background: var(--pixel-pink);
-      transform: translateY(-1px);
-    }
-
-    .btn-qr-share:active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0px #000;
-    }
 
     /* Action Buttons Grid */
     .action-grid {
@@ -1170,7 +1074,7 @@
     /* Interactive Mascot Pixel Cat Container (Top Right of Card) */
     .pixel-cat-mascot {
       position: absolute;
-      top: -40px;
+      top: -26px;
       right: 14px;
       z-index: 50;
       cursor: pointer;
@@ -1188,7 +1092,7 @@
       }
 
       100% {
-        transform: translateY(-6px);
+        transform: translateY(-4px);
       }
     }
 
@@ -1220,8 +1124,100 @@
       }
 
       100% {
-        transform: translateY(-10px) scale(1.1);
+        transform: translateY(-6px) scale(1.05);
       }
+    }
+
+    /* 4. LOVE MOOD (Heart Eyes 💖) */
+    .pixel-cat-mascot.mood-love .eyes-love,
+    .pixel-cat-mascot.mood-love .mouth-happy,
+    .pixel-cat-mascot.mood-love .cheeks-blush {
+      display: block;
+    }
+
+    .pixel-cat-mascot.mood-love {
+      animation: catLoveHeartBeat 0.35s ease-in-out infinite alternate;
+    }
+
+    @keyframes catLoveHeartBeat {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+
+      100% {
+        transform: translateY(-7px) scale(1.1);
+      }
+    }
+
+    /* 5. WINK / PLAYFUL MOOD (Wink & Tongue :P) */
+    .pixel-cat-mascot.mood-wink .eyes-wink,
+    .pixel-cat-mascot.mood-wink .mouth-tongue,
+    .pixel-cat-mascot.mood-wink .cheeks-blush {
+      display: block;
+    }
+
+    .pixel-cat-mascot.mood-wink {
+      animation: catWinkTilt 0.3s ease-in-out infinite alternate;
+    }
+
+    @keyframes catWinkTilt {
+      0% {
+        transform: rotate(-6deg);
+      }
+
+      100% {
+        transform: rotate(6deg) translateY(-5px);
+      }
+    }
+
+    /* 6. SHY MOOD (> < Eyes) */
+    .pixel-cat-mascot.mood-shy .eyes-shy,
+    .pixel-cat-mascot.mood-shy .mouth-happy,
+    .pixel-cat-mascot.mood-shy .cheeks-blush {
+      display: block;
+    }
+
+    .pixel-cat-mascot.mood-shy {
+      animation: catHappyBounce 0.35s ease-in-out infinite alternate;
+    }
+
+    /* Retro Pixel Speech Bubble for Cat */
+    .cat-speech-bubble {
+      position: absolute;
+      top: -38px;
+      right: 48px;
+      background: #ffffff;
+      border: 3px solid #000000;
+      box-shadow: 3px 3px 0px #000;
+      color: #000000;
+      font-family: 'Pixelify Sans', cursive, sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 5px 10px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(6px) scale(0.85);
+      transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 90;
+    }
+
+    .cat-speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 12px;
+      width: 6px;
+      height: 6px;
+      background: #ffffff;
+      border-right: 3px solid #000;
+      border-bottom: 3px solid #000;
+      transform: rotate(45deg);
+    }
+
+    .cat-speech-bubble.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
 
     /* 3. SAD MOOD (Dodging No Button) */
@@ -1891,10 +1887,257 @@
       transform: translate(1px, 1px);
       box-shadow: 1px 1px 0px #000;
     }
+
+    /* ==================== RETRO 8-BIT ARCADE LOADING SCREEN ==================== */
+    .retro-loader-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background-color: #0f051d;
+      background-image:
+        linear-gradient(rgba(255, 42, 133, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 42, 133, 0.15) 1px, transparent 1px),
+        radial-gradient(circle at 50% 40%, #3c096c 0%, #1a052c 70%, #0f051d 100%);
+      background-size: 24px 24px, 24px 24px, 100% 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      user-select: none;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .retro-loader-overlay.fade-out {
+      opacity: 0;
+      transform: scale(1.08);
+      pointer-events: none;
+    }
+
+    .loader-crt-scanlines {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+      background-size: 100% 4px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .loader-content-box {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 380px;
+      background: rgba(15, 5, 29, 0.94);
+      border: 4px solid var(--pixel-pink);
+      box-shadow:
+        8px 8px 0px #000000,
+        0 0 25px rgba(255, 42, 133, 0.5),
+        inset 0 0 15px rgba(0, 245, 212, 0.2);
+      border-radius: 12px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .loader-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: var(--pixel-cyan);
+      background: #000;
+      border: 2px solid var(--pixel-cyan);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .loader-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--pixel-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--pixel-cyan);
+      animation: blinkCursor 0.8s infinite alternate;
+    }
+
+    .loader-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 22px;
+      color: var(--pixel-gold);
+      text-shadow: 3px 3px 0px #000, -2px -2px 0px #ff2a85;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .loader-subtitle {
+      font-family: 'Pixelify Sans', cursive, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--pixel-pink-glow);
+      text-shadow: 1px 1px 0px #000;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .loader-pixel-mascot {
+      margin: 8px 0 20px;
+      animation: loaderHeartPulse 1.2s infinite ease-in-out alternate;
+    }
+
+    @keyframes loaderHeartPulse {
+      0% {
+        transform: scale(0.95);
+        filter: drop-shadow(0 0 4px rgba(255, 42, 133, 0.4));
+      }
+
+      100% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 16px rgba(255, 42, 133, 0.9));
+      }
+    }
+
+    .loader-progress-container {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .loader-progress-track {
+      width: 100%;
+      height: 22px;
+      background: #000000;
+      border: 3px solid var(--pixel-gold);
+      box-shadow: 3px 3px 0px #000;
+      padding: 3px;
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .loader-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pixel-pink) 0%, var(--pixel-gold) 50%, var(--pixel-cyan) 100%);
+      box-shadow: 0 0 10px rgba(0, 245, 212, 0.8);
+      transition: width 0.15s ease-out;
+      border-radius: 2px;
+    }
+
+    .loader-percentage-wrap {
+      margin-top: 8px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--pixel-gold);
+      text-shadow: 2px 2px 0px #000;
+    }
+
+    .loader-terminal-box {
+      width: 100%;
+      min-height: 38px;
+      background: #000000;
+      border: 2px solid var(--pixel-purple);
+      box-shadow: 2px 2px 0px #000;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .loader-terminal-line {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8.5px;
+      color: var(--pixel-cyan);
+      line-height: 1.4;
+      text-shadow: 1px 1px 0px #000;
+    }
+
+    .loader-start-btn {
+      display: none;
+      width: 100%;
+      background: linear-gradient(180deg, #ff2a85 0%, #c71585 100%);
+      border: 3px solid var(--pixel-gold);
+      box-shadow: 4px 4px 0px #000, 0 0 15px rgba(255, 215, 0, 0.6);
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      animation: loaderBtnPulse 1.2s infinite alternate;
+      transition: transform 0.1s ease;
+    }
+
+    .loader-start-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    @keyframes loaderBtnPulse {
+      0% {
+        box-shadow: 4px 4px 0px #000, 0 0 10px rgba(255, 42, 133, 0.6);
+      }
+
+      100% {
+        box-shadow: 4px 4px 0px #000, 0 0 20px rgba(255, 215, 0, 0.9);
+      }
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- ==================== RETRO 8-BIT ARCADE LOADING SCREEN ==================== -->
+  <div id="retro-loader-overlay" class="retro-loader-overlay">
+    <div class="loader-crt-scanlines"></div>
+    <div class="loader-content-box">
+      <!-- Arcade Boot Header Badge -->
+      <div class="loader-header-badge">
+        <span class="loader-badge-dot"></span> SYSTEM BOOTUP v2.0
+      </div>
+
+      <h1 class="loader-title">SHANZIE.EXE</h1>
+      <p class="loader-subtitle">LOVE ARCADE LOADING SYSTEM 🎮💌</p>
+
+      <!-- Animated 8-bit Pixel Heart Mascot -->
+      <div class="loader-pixel-mascot">
+        <svg width="64" height="64" viewBox="0 0 16 16"
+          style="image-rendering: pixelated; filter: drop-shadow(4px 4px 0px #000);">
+          <rect x="3" y="2" width="3" height="3" fill="#ff2a85" />
+          <rect x="10" y="2" width="3" height="3" fill="#ff2a85" />
+          <rect x="2" y="4" width="12" height="4" fill="#ff2a85" />
+          <rect x="4" y="4" width="2" height="2" fill="#ffffff" opacity="0.8" />
+          <rect x="3" y="8" width="10" height="3" fill="#ff2a85" />
+          <rect x="5" y="11" width="6" height="2" fill="#ff2a85" />
+          <rect x="7" y="13" width="2" height="2" fill="#ff2a85" />
+        </svg>
+      </div>
+
+      <!-- 8-Bit Retro Progress Bar -->
+      <div class="loader-progress-container">
+        <div class="loader-progress-track">
+          <div id="loaderProgressBar" class="loader-progress-fill" style="width: 0%;"></div>
+        </div>
+        <div class="loader-percentage-wrap">
+          <span id="loaderPercentVal">0%</span>
+        </div>
+      </div>
+
+      <!-- Dynamic Console Log Lines -->
+      <div class="loader-terminal-box">
+        <span id="loaderStatusText" class="loader-terminal-line">> Initializing romantic arcade modules...</span>
+      </div>
+
+      <!-- Press Start Button (Revealed at 100%) -->
+      <button id="loaderStartBtn" class="loader-start-btn" onclick="dismissRetroLoader()">
+        <span>🎮</span> PRESS START TO ENTER <span>✨</span>
+      </button>
+    </div>
+  </div>
 
   <!-- Optional Custom MP3 Audio Tag (Isi src="..." jika ingin ganti dengan file MP3 lagu romantis favorit) -->
   <audio id="customBgm" loop src=""></audio>
@@ -2021,6 +2264,32 @@
           <rect class="tear-drop" x="11" y="7" width="1" height="2" fill="#00f5d4" />
         </g>
 
+        <!-- 4. LOVE EYES 💖 💖 -->
+        <g class="face-element eyes-love">
+          <rect x="3" y="5" width="3" height="2" fill="#ff2a85" />
+          <rect x="4" y="6" width="1" height="1" fill="#ffffff" />
+          <rect x="9" y="5" width="3" height="2" fill="#ff2a85" />
+          <rect x="10" y="6" width="1" height="1" fill="#ffffff" />
+        </g>
+
+        <!-- 5. WINK EYES ★ ^ -->
+        <g class="face-element eyes-wink">
+          <rect x="3" y="6" width="3" height="1" fill="#0f051d" />
+          <rect x="9" y="6" width="3" height="1" fill="#0f051d" />
+          <rect x="9" y="5" width="1" height="1" fill="#0f051d" />
+          <rect x="11" y="5" width="1" height="1" fill="#0f051d" />
+        </g>
+
+        <!-- 6. SHY EYES > < -->
+        <g class="face-element eyes-shy">
+          <rect x="4" y="5" width="1" height="1" fill="#0f051d" />
+          <rect x="5" y="6" width="1" height="1" fill="#0f051d" />
+          <rect x="4" y="7" width="1" height="1" fill="#0f051d" />
+          <rect x="11" y="5" width="1" height="1" fill="#0f051d" />
+          <rect x="10" y="6" width="1" height="1" fill="#0f051d" />
+          <rect x="11" y="7" width="1" height="1" fill="#0f051d" />
+        </g>
+
         <!-- Whiskers -->
         <rect x="0" y="7" width="2" height="1" fill="#ffd700" />
         <rect x="14" y="7" width="2" height="1" fill="#ffd700" />
@@ -2035,6 +2304,12 @@
         <g class="face-element mouth-happy">
           <rect x="6" y="8" width="4" height="2" fill="#ff2a85" />
           <rect x="7" y="9" width="2" height="1" fill="#ffd700" />
+        </g>
+
+        <!-- Cute Tongue Mouth :P -->
+        <g class="face-element mouth-tongue">
+          <rect x="6" y="8" width="4" height="1" fill="#ff2a85" />
+          <rect x="7" y="9" width="2" height="2" fill="#ff75b5" />
         </g>
 
         <!-- Sad Frown Mouth :( -->
@@ -2062,10 +2337,43 @@
     <!-- ==================== SCENE 0: PIN LOCK ==================== -->
     <div class="scene" id="scene-pin">
       <div class="glass-card pin-card">
-        <div class="pin-lock-icon">🔐✨</div>
+        <div class="pin-lock-icon">
+          <svg width="68" height="68" viewBox="0 0 24 24"
+            style="image-rendering: pixelated; filter: drop-shadow(3px 3px 0px #000); shape-rendering: crispEdges;">
+            <!-- Lock Shackle -->
+            <rect x="8" y="2" width="8" height="2" fill="#ffd700" />
+            <rect x="6" y="4" width="3" height="6" fill="#ffd700" />
+            <rect x="15" y="4" width="3" height="6" fill="#ffd700" />
+            <rect x="9" y="4" width="6" height="4" fill="#1a052c" />
+            <!-- Lock Body -->
+            <rect x="5" y="9" width="14" height="11" fill="#ff2a85" />
+            <rect x="6" y="10" width="3" height="2" fill="#ffffff" opacity="0.9" />
+            <rect x="5" y="19" width="14" height="2" fill="#b80053" />
+            <!-- Keyhole -->
+            <rect x="11" y="12" width="2" height="3" fill="#000000" />
+            <rect x="10" y="14" width="4" height="3" fill="#000000" />
+            <rect x="11" y="13" width="2" height="2" fill="#00f5d4" />
+            <!-- Pixel Sparkle 1 -->
+            <rect x="20" y="3" width="1" height="3" fill="#00f5d4" />
+            <rect x="19" y="4" width="3" height="1" fill="#00f5d4" />
+            <!-- Pixel Sparkle 2 -->
+            <rect x="2" y="13" width="1" height="3" fill="#ffd700" />
+            <rect x="1" y="14" width="3" height="1" fill="#ffd700" />
+          </svg>
+        </div>
         <div class="badge">Akses Secret Pin</div>
         <h1 class="title-romantic">Wellcome Shanzie</h1>
-        <p class="subtitle-romantic">Masukkan Kode Kunci Rahasia (DD-MM) 💌</p>
+        <p class="subtitle-romantic">
+          Masukkan Pin Rahasia
+          <svg width="18" height="18" viewBox="0 0 16 16"
+            style="image-rendering: pixelated; vertical-align: middle; margin-left: 4px; shape-rendering: crispEdges; filter: drop-shadow(1px 1px 0px #000);">
+            <rect x="1" y="3" width="14" height="10" fill="#ff2a85" />
+            <rect x="2" y="4" width="12" height="8" fill="#ffffff" />
+            <rect x="3" y="5" width="10" height="2" fill="#ff75b5" />
+            <rect x="5" y="7" width="6" height="2" fill="#ff2a85" />
+            <rect x="7" y="9" width="2" height="2" fill="#ffd700" />
+          </svg>
+        </p>
 
         <div class="pin-dots-wrap" id="pinDotsWrap">
           <div class="pin-dot" id="dot0"></div>
@@ -2078,7 +2386,17 @@
         <!-- Interactive Clue Button (Initially hidden, pops up on wrong PIN entry) -->
         <div id="clueBtnContainer">
           <button class="btn-clue" onclick="toggleClueModal()">
-            <span>💡</span> mau clue gaa???
+            <svg width="16" height="16" viewBox="0 0 16 16"
+              style="image-rendering: pixelated; vertical-align: middle; shape-rendering: crispEdges;">
+              <rect x="6" y="1" width="4" height="1" fill="#000000" />
+              <rect x="5" y="2" width="6" height="4" fill="#000000" />
+              <rect x="6" y="3" width="4" height="3" fill="#ffd700" />
+              <rect x="6" y="3" width="2" height="2" fill="#ffffff" />
+              <rect x="6" y="6" width="4" height="2" fill="#000000" />
+              <rect x="6" y="8" width="4" height="2" fill="#777777" />
+              <rect x="7" y="10" width="2" height="1" fill="#000000" />
+            </svg>
+            mau clue gaa???
           </button>
         </div>
 
@@ -2105,14 +2423,50 @@
     <!-- Interactive Clue Modal Card -->
     <div class="clue-modal-overlay" id="clueModal" onclick="closeClueModal(event)">
       <div class="clue-modal-card" onclick="event.stopPropagation()">
-        <div class="clue-modal-icon">💡✨</div>
-        <h3>clue nyaa 🤫</h3>
+        <div class="clue-modal-icon"
+          style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+          <svg width="60" height="60" viewBox="0 0 20 20"
+            style="image-rendering: pixelated; filter: drop-shadow(3px 3px 0px #000); shape-rendering: crispEdges;">
+            <!-- Bulb -->
+            <rect x="7" y="2" width="6" height="1" fill="#ffd700" />
+            <rect x="5" y="3" width="10" height="7" fill="#ffd700" />
+            <rect x="6" y="4" width="3" height="3" fill="#ffffff" />
+            <rect x="6" y="10" width="8" height="3" fill="#ffd700" />
+            <!-- Base -->
+            <rect x="7" y="13" width="6" height="3" fill="#c0c0c0" />
+            <rect x="8" y="16" width="4" height="2" fill="#666666" />
+            <!-- Sparkle Left -->
+            <rect x="2" y="4" width="1" height="3" fill="#00f5d4" />
+            <rect x="1" y="5" width="3" height="1" fill="#00f5d4" />
+            <!-- Sparkle Right -->
+            <rect x="17" y="5" width="1" height="3" fill="#ff75b5" />
+            <rect x="16" y="6" width="3" height="1" fill="#ff75b5" />
+          </svg>
+        </div>
+        <h3>clue nyaa <svg width="18" height="18" viewBox="0 0 16 16"
+            style="image-rendering: pixelated; vertical-align: middle; margin-left: 2px; shape-rendering: crispEdges;">
+            <rect x="7" y="2" width="2" height="4" fill="#ffd700" />
+            <rect x="5" y="4" width="6" height="2" fill="#ffd700" />
+            <rect x="4" y="6" width="8" height="8" fill="#ffd700" />
+            <rect x="6" y="8" width="4" height="4" fill="#1a052c" />
+          </svg></h3>
         <div class="clue-modal-text">
           "Tanggal di mana kita gajadi dinner"
         </div>
         <small style="color: var(--text-muted); font-size: 12px; display: block; margin-top: 8px;">Format PIN: DD-MM
           (Hari - Bulan)</small>
-        <button class="btn-close-clue" onclick="closeClueModal()">Oke, Paham! 🙈</button>
+        <button class="btn-close-clue" onclick="closeClueModal()">
+          Oke, Paham!
+          <svg width="14" height="14" viewBox="0 0 16 16"
+            style="image-rendering: pixelated; vertical-align: middle; margin-left: 4px; shape-rendering: crispEdges;">
+            <rect x="3" y="2" width="3" height="3" fill="#ffffff" />
+            <rect x="10" y="2" width="3" height="3" fill="#ffffff" />
+            <rect x="2" y="5" width="12" height="4" fill="#ffffff" />
+            <rect x="3" y="9" width="10" height="3" fill="#ffffff" />
+            <rect x="5" y="12" width="6" height="2" fill="#ffffff" />
+            <rect x="7" y="14" width="2" height="1" fill="#ffffff" />
+          </svg>
+        </button>
       </div>
     </div>
 
@@ -2146,7 +2500,59 @@
     <!-- ==================== SCENE 2: QUESTION ==================== -->
     <div class="scene" id="scene-question">
       <div class="glass-card">
-        <div class="question-avatar">💕💕</div>
+        <div class="question-avatar">
+          <svg width="90" height="90" viewBox="0 0 28 28"
+            style="image-rendering: pixelated; filter: drop-shadow(4px 4px 0px #000); shape-rendering: crispEdges;">
+            <style>
+              .p-heart-1 {
+                animation: pPulse 1.4s ease-in-out infinite;
+                transform-origin: 9px 12px;
+              }
+
+              .p-heart-2 {
+                animation: pPulse 1.4s ease-in-out 0.35s infinite;
+                transform-origin: 19px 9px;
+              }
+
+              @keyframes pPulse {
+
+                0%,
+                100% {
+                  transform: translateY(0) scale(1);
+                }
+
+                50% {
+                  transform: translateY(-3px) scale(1.08);
+                }
+              }
+            </style>
+            <!-- Left Big Pixel Heart (Pink) -->
+            <g class="p-heart-1">
+              <rect x="3" y="5" width="4" height="3" fill="#ff2a85" />
+              <rect x="9" y="5" width="4" height="3" fill="#ff2a85" />
+              <rect x="2" y="8" width="12" height="4" fill="#ff2a85" />
+              <rect x="4" y="8" width="2" height="2" fill="#ffffff" opacity="0.9" />
+              <rect x="3" y="12" width="10" height="3" fill="#ff2a85" />
+              <rect x="5" y="15" width="6" height="3" fill="#ff2a85" />
+              <rect x="7" y="18" width="2" height="2" fill="#ff2a85" />
+            </g>
+            <!-- Right Floating Heart (Gold) -->
+            <g class="p-heart-2">
+              <rect x="15" y="2" width="3" height="2" fill="#ffd700" />
+              <rect x="20" y="2" width="3" height="2" fill="#ffd700" />
+              <rect x="14" y="4" width="10" height="3" fill="#ffd700" />
+              <rect x="16" y="4" width="1" height="1" fill="#ffffff" />
+              <rect x="15" y="7" width="8" height="2" fill="#ffd700" />
+              <rect x="16" y="9" width="6" height="2" fill="#ffd700" />
+              <rect x="18" y="11" width="2" height="2" fill="#ffd700" />
+            </g>
+            <!-- Pixel Sparkles -->
+            <rect x="1" y="2" width="1" height="3" fill="#00f5d4" />
+            <rect x="0" y="3" width="3" height="1" fill="#00f5d4" />
+            <rect x="25" y="16" width="1" height="3" fill="#ff75b5" />
+            <rect x="24" y="17" width="3" height="1" fill="#ff75b5" />
+          </svg>
+        </div>
         <div class="badge">Pertanyaan Penting</div>
         <h2 class="q-title">
           Sayangg,<br>
@@ -2154,7 +2560,18 @@
         </h2>
 
         <div class="btn-group" id="btnGroup">
-          <button class="btn-yes" id="btnYes" onclick="handleYesClick()">mau banget!!💖</button>
+          <button class="btn-yes" id="btnYes" onclick="handleYesClick()">
+            mau banget!!
+            <svg width="18" height="18" viewBox="0 0 16 16"
+              style="image-rendering: pixelated; vertical-align: middle; margin-left: 4px; shape-rendering: crispEdges;">
+              <rect x="3" y="2" width="3" height="3" fill="#ffffff" />
+              <rect x="10" y="2" width="3" height="3" fill="#ffffff" />
+              <rect x="2" y="5" width="12" height="4" fill="#ffffff" />
+              <rect x="3" y="9" width="10" height="3" fill="#ffffff" />
+              <rect x="5" y="12" width="6" height="2" fill="#ffffff" />
+              <rect x="7" y="14" width="2" height="1" fill="#ffffff" />
+            </svg>
+          </button>
           <button class="btn-no" id="btnNo">ga..</button>
         </div>
 
@@ -2368,26 +2785,6 @@
           </a>
         </div>
 
-        <!-- Heart Shaped Retro QR Code Card Section -->
-        <div class="qr-heart-section">
-          <div class="qr-heart-badge">💖 SCAN QR UNDANGAN KENCAN 💖</div>
-          <div class="qr-heart-frame-container">
-            <div class="qr-code-box">
-              <img id="qrCodeImg" src="" alt="QR Code Undangan Shanzie" />
-              <div class="qr-center-heart">💌</div>
-            </div>
-          </div>
-          <p class="qr-instruction">Scan QR Code berbentuk love ini pakai HP lain untuk langsung membuka undangan kencan
-            💖</p>
-          <div style="margin-top: 10px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn-qr-share" onclick="copyInvitationLink()">
-              <span>📋</span> Salin Link
-            </button>
-            <button class="btn-qr-share" onclick="downloadQrImage()" style="background: var(--pixel-pink);">
-              <span>📥</span> Download Gambar QR
-            </button>
-          </div>
-        </div>
 
         <div class="footer-love">Can't wait to see you🥰</div>
       </div>
@@ -2397,6 +2794,83 @@
 
   <!-- JavaScript Retro Arcade Engine -->
   <script>
+    /* ===================================================
+       0. RETRO 8-BIT LOADING SCREEN LOGIC
+       =================================================== */
+    let loaderProgress = 0;
+    let loaderInterval = null;
+
+    const loaderStatusMessages = [
+      "> Booting romantic arcade engine...",
+      "> Calibrating 8-bit pixel hearts...",
+      "> Tuning retro chiptune sound synth...",
+      "> Gathering sweet date memories...",
+      "> Loading cute cat mascot emotions...",
+      "> ARCADE SYSTEM READY! 🚀"
+    ];
+
+    function runRetroLoader() {
+      const progressBar = document.getElementById('loaderProgressBar');
+      const percentVal = document.getElementById('loaderPercentVal');
+      const statusText = document.getElementById('loaderStatusText');
+      const startBtn = document.getElementById('loaderStartBtn');
+
+      if (!progressBar || !percentVal || !statusText) return;
+
+      let msgIndex = 0;
+
+      loaderInterval = setInterval(() => {
+        const step = Math.floor(Math.random() * 8) + 4;
+        loaderProgress = Math.min(100, loaderProgress + step);
+
+        progressBar.style.width = loaderProgress + '%';
+        percentVal.textContent = loaderProgress + '%';
+
+        const targetMsgIndex = Math.min(
+          loaderStatusMessages.length - 1,
+          Math.floor((loaderProgress / 100) * loaderStatusMessages.length)
+        );
+
+        if (targetMsgIndex !== msgIndex) {
+          msgIndex = targetMsgIndex;
+          statusText.textContent = loaderStatusMessages[msgIndex];
+        }
+
+        if (loaderProgress >= 100) {
+          clearInterval(loaderInterval);
+          statusText.textContent = loaderStatusMessages[loaderStatusMessages.length - 1];
+          statusText.style.color = "var(--pixel-gold)";
+
+          try { playChiptuneBeep(); } catch (e) { }
+
+          if (startBtn) {
+            startBtn.style.display = 'block';
+          }
+        }
+      }, 75);
+    }
+
+    function dismissRetroLoader() {
+      try {
+        initAudio();
+        playChiptuneChime();
+      } catch (e) { }
+
+      const overlay = document.getElementById('retro-loader-overlay');
+      if (overlay) {
+        overlay.classList.add('fade-out');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 650);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', runRetroLoader);
+    } else {
+      runRetroLoader();
+    }
+
     /* ===================================================
        1. RETRO 8-BIT CHIPTUNE SOUND SYNTHESIZER
        =================================================== */
@@ -2714,7 +3188,7 @@
         for (let i = 0; i < 4; i++) {
           document.getElementById(`dot${i}`).classList.add('success');
         }
-        hint.textContent = "🔓 PIN Benar! Membuka amplop...";
+        hint.innerHTML = "<span style='color:var(--pixel-cyan);'>[✓]</span> PIN Benar! Membuka amplop...";
         hint.style.color = "var(--pixel-gold)";
 
         const rect = wrap.getBoundingClientRect();
@@ -2741,7 +3215,7 @@
         for (let i = 0; i < 4; i++) {
           document.getElementById(`dot${i}`).classList.add('error');
         }
-        hint.textContent = "❌ Ups, PIN salah sayang! Coba klik clue yang baru muncul 😉";
+        hint.innerHTML = "<span style='color:var(--pixel-pink);'>[✕]</span> Ups, PIN salah sayang! Coba klik clue yang baru muncul...";
         hint.style.color = "var(--pixel-pink)";
 
         // Reveal clue button after entering wrong PIN
@@ -2777,11 +3251,11 @@
     const btnYes = document.getElementById('btnYes');
     const dodgeNote = document.getElementById('dodgeNote');
     const notes = [
-      "Eits gak kena 😜",
-      "Gabakal bisa🏃💨",
-      "Udah klik yang pink aja🥹💖",
-      "Masih maksa yaa",
-      "Udah deh, pilih 'mau banget!!💖' aja ya ✨"
+      "Eits gak kena! ⚡",
+      "Gabakal bisa! 👾",
+      "Udah klik tombol pink aja! 💕",
+      "Masih maksa yaa...",
+      "Udah deh, pilih 'mau banget!!' aja ya! ✨"
     ];
     let noteIdx = 0;
     let yesScale = 1;
@@ -2960,49 +3434,9 @@
       const location = encodeURIComponent("Karawaci Supermall, Tangerang");
       const dates = "20260906T040000Z/20260906T090000Z";
       document.getElementById('gCalBtn').href = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`;
-
-      updateQrCode();
     }
 
-    function updateQrCode() {
-      const qrImg = document.getElementById('qrCodeImg');
-      if (!qrImg) return;
-      const currentUrl = window.location.href;
-      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=ff2a85&bgcolor=080212&data=${encodeURIComponent(currentUrl)}`;
-      qrImg.src = qrApiUrl;
-    }
 
-    function copyInvitationLink() {
-      initAudio();
-      playChiptuneChime();
-      const currentUrl = window.location.href;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(currentUrl).then(() => {
-          alert('📋 Link Undangan Kencan berhasil disalin!');
-        }).catch(() => {
-          prompt('Salin link undangan ini:', currentUrl);
-        });
-      } else {
-        prompt('Salin link undangan ini:', currentUrl);
-      }
-    }
-
-    function downloadQrImage() {
-      initAudio();
-      playChiptuneChime();
-      const qrImg = document.getElementById('qrCodeImg');
-      if (!qrImg || !qrImg.src) return;
-      const a = document.createElement('a');
-      a.href = qrImg.src;
-      a.download = 'QR-Undangan-Shanzie.png';
-      a.target = '_blank';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-
-    document.addEventListener('DOMContentLoaded', updateQrCode);
-    setTimeout(updateQrCode, 500);
 
     /* ===================================================
        PIXEL CAT INTERACTIVE MOOD & SOUND SYNTHESIZER
@@ -3014,8 +3448,38 @@
       currentCatMood = mood;
       const cat = document.getElementById('pixelCatContainer');
       if (!cat) return;
-      cat.classList.remove('mood-normal', 'mood-happy', 'mood-sad');
+      cat.classList.remove('mood-normal', 'mood-happy', 'mood-sad', 'mood-love', 'mood-wink', 'mood-shy');
       cat.classList.add(`mood-${mood}`);
+    }
+
+    const catClickMessages = [
+      "Meow! Hehehehe 💕",
+      "Purrr... Elus aku dong! 🐾",
+      "Nyaaa~ 💖",
+      "Mew mew! Geliii..",
+      "Meow! I love you 💓",
+      "wleeee...🥰",
+      "Ini my love??🙈🎉"
+    ];
+    const catClickMoods = ['happy', 'love', 'wink', 'shy'];
+    let catClickIdx = 0;
+
+    function showCatSpeech(text) {
+      const cat = document.getElementById('pixelCatContainer');
+      if (!cat) return;
+      let bubble = document.getElementById('catSpeechBubble');
+      if (!bubble) {
+        bubble = document.createElement('div');
+        bubble.id = 'catSpeechBubble';
+        bubble.className = 'cat-speech-bubble';
+        cat.appendChild(bubble);
+      }
+      bubble.textContent = text;
+      bubble.classList.add('active');
+      clearTimeout(window.catSpeechTimer);
+      window.catSpeechTimer = setTimeout(() => {
+        bubble.classList.remove('active');
+      }, 2600);
     }
 
     function playChiptuneMeow() {
@@ -3062,18 +3526,27 @@
 
     function meowCat() {
       playChiptuneMeow();
-      setCatMood('happy');
+
+      const mood = catClickMoods[catClickIdx % catClickMoods.length];
+      setCatMood(mood);
+
+      const msg = catClickMessages[catClickIdx % catClickMessages.length];
+      showCatSpeech(msg);
+
+      catClickIdx++;
+
       const cat = document.getElementById('pixelCatContainer');
       if (cat) {
         const rect = cat.getBoundingClientRect();
         launchBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 22);
       }
+
       clearTimeout(catMoodTimer);
       catMoodTimer = setTimeout(() => {
         if (!document.getElementById('scene-reveal').classList.contains('active')) {
           setCatMood('normal');
         }
-      }, 2500);
+      }, 3000);
     }
 
     /* ===================================================
