@@ -1704,6 +1704,81 @@
       user-select: none;
     }
 
+    /* ---------- ARCADE LOCK / PADLOCK SCREEN ---------- */
+    .arcade-lock-display {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      padding: 12px 10px;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+      animation: fadeInOut 0.4s ease both;
+    }
+
+    .arcade-lock-badge {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8.5px;
+      color: var(--pixel-gold);
+      text-shadow: 2px 2px 0px #000;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .arcade-lock-icon-wrap {
+      cursor: pointer;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 3px solid var(--pixel-gold);
+      box-shadow: 4px 4px 0px #000, 0 0 15px rgba(255, 215, 0, 0.4);
+      border-radius: 6px;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, border-color 0.2s ease;
+      animation: padlockPulse 1.8s infinite ease-in-out alternate;
+    }
+
+    .arcade-lock-icon-wrap:hover {
+      transform: scale(1.06);
+      border-color: var(--pixel-pink);
+      box-shadow: 4px 4px 0px #000, 0 0 20px rgba(255, 42, 133, 0.7);
+    }
+
+    .arcade-lock-icon-wrap:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes padlockPulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 3px 3px 0px #000, 0 0 8px rgba(255, 215, 0, 0.4);
+      }
+
+      100% {
+        transform: scale(1.05);
+        box-shadow: 4px 4px 0px #000, 0 0 18px rgba(255, 215, 0, 0.8);
+      }
+    }
+
+    .arcade-pixel-padlock {
+      font-size: 38px;
+      line-height: 1;
+      filter: drop-shadow(2px 2px 0px #000);
+      transition: transform 0.3s ease;
+    }
+
+    .arcade-lock-click-hint {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7.5px;
+      color: #ffffff;
+      text-shadow: 1px 1px 0px #000;
+      animation: blinkCursor 0.8s infinite alternate;
+    }
+
     .btn-deck-nav:active {
       transform: translate(1px, 1px);
       box-shadow: 1px 1px 0px #000;
@@ -2451,7 +2526,7 @@
             <rect x="6" y="8" width="4" height="4" fill="#1a052c" />
           </svg></h3>
         <div class="clue-modal-text">
-          "Tanggal di mana kita gajadi dinner"
+          "Hari di mana kita kehujanan di mobil"
         </div>
         <small style="color: var(--text-muted); font-size: 12px; display: block; margin-top: 8px;">Format PIN: DD-MM
           (Hari - Bulan)</small>
@@ -2651,11 +2726,45 @@
                   <div class="game-basket" id="gameBasket">🧺</div>
                   <div class="arcade-game-win-overlay" id="arcadeGameOverlay">
                     <h4>🎉 STAGE CLEARED! 🏆</h4>
-                    <p>Membuka Surat Rahasia...</p>
+                    <p>Buka Gemboknya Ya Sayang! 👇</p>
                   </div>
                 </div>
 
-                <!-- Letter Typewriter Container (Hidden during mini-game) -->
+                <!-- Retro Padlock Display (Shows after winning mini-game before letter opens) -->
+                <div class="arcade-lock-display" id="arcadeLockDisplay">
+                  <div class="arcade-lock-badge">🔒 SURAT RAHASIA TERKUNCI</div>
+                  <div class="arcade-lock-icon-wrap" id="arcadeLockBtn" onclick="unlockArcadeLetter()">
+                    <div class="arcade-pixel-padlock" id="arcadeLockIcon">
+                      <svg width="54" height="54" viewBox="0 0 20 20"
+                        style="image-rendering: pixelated; shape-rendering: crispEdges; filter: drop-shadow(3px 3px 0px #000);">
+                        <rect x="6" y="2" width="8" height="2" fill="#000000" />
+                        <rect x="4" y="4" width="2" height="6" fill="#000000" />
+                        <rect x="14" y="4" width="2" height="6" fill="#000000" />
+                        <rect x="7" y="3" width="6" height="1" fill="#e5e7eb" />
+                        <rect x="5" y="4" width="2" height="5" fill="#9ca3af" />
+                        <rect x="6" y="4" width="1" height="5" fill="#f3f4f6" />
+                        <rect x="13" y="4" width="2" height="5" fill="#9ca3af" />
+                        <rect x="13" y="4" width="1" height="5" fill="#e5e7eb" />
+                        <rect x="7" y="4" width="6" height="5" fill="#000000" />
+                        <rect x="2" y="8" width="16" height="11" fill="#000000" />
+                        <rect x="3" y="9" width="14" height="9" fill="#ffd700" />
+                        <rect x="3" y="9" width="14" height="1" fill="#fffbeb" />
+                        <rect x="3" y="10" width="1" height="7" fill="#fef08a" />
+                        <rect x="16" y="10" width="1" height="7" fill="#d97706" />
+                        <rect x="3" y="17" width="14" height="1" fill="#b45309" />
+                        <rect x="8" y="11" width="1" height="1" fill="#ff2a85" />
+                        <rect x="11" y="11" width="1" height="1" fill="#ff2a85" />
+                        <rect x="7" y="12" width="6" height="2" fill="#ff2a85" />
+                        <rect x="8" y="14" width="4" height="1" fill="#ff2a85" />
+                        <rect x="9" y="15" width="2" height="1" fill="#ff2a85" />
+                        <rect x="9" y="12" width="2" height="2" fill="#000000" />
+                      </svg>
+                    </div>
+                    <div class="arcade-lock-click-hint">✨ KLIK GEMBOK UNTUK MEMBUKA ✨</div>
+                  </div>
+                </div>
+
+                <!-- Letter Typewriter Container (Hidden during mini-game and lock screen) -->
                 <div id="arcadeLetterDisplay" style="display: none;">
                   <span class="arcade-screen-text" id="arcadeLetterText"></span><span class="arcade-cursor"
                     id="arcadeCursor"></span>
@@ -2758,7 +2867,7 @@
                 <div class="add-agenda-title">✨ Ada agenda lain buat kita Sayang?</div>
                 <div class="add-agenda-input-wrap">
                   <input type="text" id="customAgendaInput" class="agenda-input"
-                    placeholder="Tulis disini agendanyaa..." maxlength="70"
+                    placeholder="Tulis disini agendanyaa..." maxlength="70" oninput="setupActionLinks()"
                     onkeydown="if(event.key==='Enter') addCustomAgenda()">
                   <button class="btn-add-agenda" id="btnAddAgenda" onclick="addCustomAgenda()">+ Tambah</button>
                 </div>
@@ -2777,10 +2886,11 @@
 
         <!-- Action Buttons -->
         <div class="action-grid">
-          <a id="waReplyBtn" href="#" target="_blank" class="btn-action btn-action-primary">
+          <a id="waReplyBtn" href="#" target="_blank" onclick="setupActionLinks()"
+            class="btn-action btn-action-primary">
             <span>💬</span> Kirim Konfirmasi ke WhatsApp
           </a>
-          <a id="gCalBtn" href="#" target="_blank" class="btn-action btn-action-secondary">
+          <a id="gCalBtn" href="#" target="_blank" onclick="setupActionLinks()" class="btn-action btn-action-secondary">
             <span>📅</span> Tambahkan ke Google Calendar
           </a>
         </div>
@@ -3372,11 +3482,15 @@
     let customAgendas = [];
     let timelineCount = 4;
 
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
     function addCustomAgenda() {
       const input = document.getElementById('customAgendaInput');
-      const val = input.value.trim();
+      const val = input ? input.value.trim() : "";
       if (!val) {
-        input.focus();
+        if (input) input.focus();
         playChiptuneBeep();
         return;
       }
@@ -3389,11 +3503,13 @@
       card.style.animation = 'fadeInOut 0.4s ease both';
       card.innerHTML = `
       <div class="timeline-step">${timelineCount}</div>
-      <div class="timeline-desc">💖 <b>Agenda Impian Shanzie:</b> ${val}</div>
+      <div class="timeline-desc">💖 <b>Agenda Impian Shanzie:</b> ${escapeHtml(val)}</div>
     `;
 
       const box = document.querySelector('.add-agenda-box');
-      box.parentNode.insertBefore(card, box);
+      if (box && box.parentNode) {
+        box.parentNode.insertBefore(card, box);
+      }
 
       input.value = '';
       playChiptuneChime();
@@ -3408,24 +3524,37 @@
     }
 
     function setupActionLinks() {
-      let customText = "";
-      if (customAgendas.length > 0) {
-        customText += "%0A%0A✨ Aku juga nambahin agenda impianku ya:%0A" + customAgendas.map((a, i) => `${i + 1}. ${a}`).join('%0A');
+      const currentInputEl = document.getElementById('customAgendaInput');
+      const currentInputVal = currentInputEl ? currentInputEl.value.trim() : "";
+
+      let allAgendas = [...customAgendas];
+      if (currentInputVal && !allAgendas.includes(currentInputVal)) {
+        allAgendas.push(currentInputVal);
       }
 
       const sweetNoteEl = document.getElementById('sweetReplyInput');
       const sweetNoteVal = sweetNoteEl ? sweetNoteEl.value.trim() : "";
-      if (sweetNoteVal) {
-        customText += "%0A%0A💌 Pesan Balasan Manisku:%0A\"" + encodeURIComponent(sweetNoteVal) + "\"";
+
+      let fullWaText = "Hai sayang! Aku mau banget ngedate sama kamu hari Minggu, 6 September nanti! 🥰✨ Nggak sabar main ke Timezone & makan udon bareng 💖";
+
+      if (allAgendas.length > 0) {
+        fullWaText += "\n\n✨ Aku juga nambahin agenda impianku ya:\n" + allAgendas.map((a, i) => `${i + 1}. ${a}`).join('\n');
       }
 
-      const waMsg = encodeURIComponent("Hai sayang! Aku mau banget ngedate sama kamu hari Minggu, 6 September nanti! 🥰✨ Nggak sabar main ke Timezone & makan udon bareng 💖") + customText;
-      document.getElementById('waReplyBtn').href = `https://wa.me/6282317580600?text=${waMsg}`;
+      if (sweetNoteVal) {
+        fullWaText += `\n\n💌 Pesan Balasan Manisku:\n"${sweetNoteVal}"`;
+      }
+
+      const waMsg = encodeURIComponent(fullWaText);
+      const waBtn = document.getElementById('waReplyBtn');
+      if (waBtn) {
+        waBtn.href = `https://wa.me/6282317580600?text=${waMsg}`;
+      }
 
       const title = encodeURIComponent("Kencan Spesial sama Shanzie 💖");
       let detailsStr = "Rencana kencan seru: Main arcade di Timezone & makan udon di Marugame Karawaci Supermall! 🥰";
-      if (customAgendas.length > 0) {
-        detailsStr += " + Agenda Tambahan Shanzie: " + customAgendas.join(', ');
+      if (allAgendas.length > 0) {
+        detailsStr += " + Agenda Tambahan Shanzie: " + allAgendas.join(', ');
       }
       if (sweetNoteVal) {
         detailsStr += " | Pesan Balasan: " + sweetNoteVal;
@@ -3433,7 +3562,10 @@
       const details = encodeURIComponent(detailsStr);
       const location = encodeURIComponent("Karawaci Supermall, Tangerang");
       const dates = "20260906T040000Z/20260906T090000Z";
-      document.getElementById('gCalBtn').href = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`;
+      const gCalBtn = document.getElementById('gCalBtn');
+      if (gCalBtn) {
+        gCalBtn.href = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`;
+      }
     }
 
 
@@ -3959,8 +4091,44 @@ I love you so much!💖`;
       }
 
       setTimeout(() => {
+        showArcadeLockScreen();
+      }, 1200);
+    }
+
+    const PIXEL_LOCK_SVG = `<svg width="54" height="54" viewBox="0 0 20 20" style="image-rendering: pixelated; shape-rendering: crispEdges; filter: drop-shadow(3px 3px 0px #000);"><rect x="6" y="2" width="8" height="2" fill="#000000" /><rect x="4" y="4" width="2" height="6" fill="#000000" /><rect x="14" y="4" width="2" height="6" fill="#000000" /><rect x="7" y="3" width="6" height="1" fill="#e5e7eb" /><rect x="5" y="4" width="2" height="5" fill="#9ca3af" /><rect x="6" y="4" width="1" height="5" fill="#f3f4f6" /><rect x="13" y="4" width="2" height="5" fill="#9ca3af" /><rect x="13" y="4" width="1" height="5" fill="#e5e7eb" /><rect x="7" y="4" width="6" height="5" fill="#000000" /><rect x="2" y="8" width="16" height="11" fill="#000000" /><rect x="3" y="9" width="14" height="9" fill="#ffd700" /><rect x="3" y="9" width="14" height="1" fill="#fffbeb" /><rect x="3" y="10" width="1" height="7" fill="#fef08a" /><rect x="16" y="10" width="1" height="7" fill="#d97706" /><rect x="3" y="17" width="14" height="1" fill="#b45309" /><rect x="8" y="11" width="1" height="1" fill="#ff2a85" /><rect x="11" y="11" width="1" height="1" fill="#ff2a85" /><rect x="7" y="12" width="6" height="2" fill="#ff2a85" /><rect x="8" y="14" width="4" height="1" fill="#ff2a85" /><rect x="9" y="15" width="2" height="1" fill="#ff2a85" /><rect x="9" y="12" width="2" height="2" fill="#000000" /></svg>`;
+
+    const PIXEL_UNLOCK_SVG = `<svg width="54" height="54" viewBox="0 0 20 20" style="image-rendering: pixelated; shape-rendering: crispEdges; filter: drop-shadow(3px 3px 0px #000);"><rect x="9" y="0" width="8" height="2" fill="#000000" /><rect x="7" y="2" width="2" height="7" fill="#000000" /><rect x="17" y="2" width="2" height="4" fill="#000000" /><rect x="10" y="1" width="6" height="1" fill="#e5e7eb" /><rect x="8" y="2" width="2" height="6" fill="#9ca3af" /><rect x="9" y="2" width="1" height="6" fill="#f3f4f6" /><rect x="16" y="2" width="2" height="3" fill="#9ca3af" /><rect x="10" y="2" width="6" height="6" fill="#000000" /><rect x="2" y="8" width="16" height="11" fill="#000000" /><rect x="3" y="9" width="14" height="9" fill="#ffd700" /><rect x="3" y="9" width="14" height="1" fill="#fffbeb" /><rect x="3" y="10" width="1" height="7" fill="#fef08a" /><rect x="16" y="10" width="1" height="7" fill="#d97706" /><rect x="3" y="17" width="14" height="1" fill="#b45309" /><rect x="8" y="11" width="1" height="1" fill="#00f5d4" /><rect x="11" y="11" width="1" height="1" fill="#00f5d4" /><rect x="7" y="12" width="6" height="2" fill="#00f5d4" /><rect x="8" y="14" width="4" height="1" fill="#00f5d4" /><rect x="9" y="15" width="2" height="1" fill="#00f5d4" /><rect x="9" y="12" width="2" height="2" fill="#ffffff" /></svg>`;
+
+    function showArcadeLockScreen() {
+      isMiniGameActive = false;
+      if (gameAnimationId) cancelAnimationFrame(gameAnimationId);
+
+      const lockIcon = document.getElementById('arcadeLockIcon');
+      if (lockIcon) lockIcon.innerHTML = PIXEL_LOCK_SVG;
+
+      document.getElementById('arcadeGameArea').style.display = 'none';
+      const lockDisp = document.getElementById('arcadeLockDisplay');
+      if (lockDisp) lockDisp.style.display = 'flex';
+      document.getElementById('arcadeLetterDisplay').style.display = 'none';
+    }
+
+    function unlockArcadeLetter() {
+      initAudio();
+      playChiptuneChime();
+
+      const lockIcon = document.getElementById('arcadeLockIcon');
+      if (lockIcon) lockIcon.innerHTML = PIXEL_UNLOCK_SVG;
+
+      const lockBtn = document.getElementById('arcadeLockBtn');
+      if (lockBtn) {
+        const rect = lockBtn.getBoundingClientRect();
+        launchBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 45);
+        lockBtn.style.transform = 'scale(1.2)';
+      }
+
+      setTimeout(() => {
         switchToLetterDisplay();
-      }, 1500);
+      }, 400);
     }
 
     function switchToLetterDisplay() {
@@ -3968,6 +4136,8 @@ I love you so much!💖`;
       if (gameAnimationId) cancelAnimationFrame(gameAnimationId);
 
       document.getElementById('arcadeGameArea').style.display = 'none';
+      const lockDisp = document.getElementById('arcadeLockDisplay');
+      if (lockDisp) lockDisp.style.display = 'none';
       document.getElementById('arcadeLetterDisplay').style.display = 'block';
 
       startArcadeLetterTypewriter();
