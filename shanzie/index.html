@@ -111,21 +111,50 @@
       margin: 10px auto 0;
     }
 
-    /* Scene Management */
+    /* Scene Management - Clean & Natural Transition */
     .scene {
       display: none;
       flex-direction: column;
       align-items: center;
       text-align: center;
       opacity: 0;
-      transform: scale(0.95);
-      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: scale(0.98);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .scene.active {
       display: flex;
-      opacity: 1;
-      transform: scale(1);
+      animation: sceneNaturalFadeIn 0.3s ease-out forwards;
+    }
+
+    .scene.exiting {
+      display: flex;
+      animation: sceneNaturalFadeOut 0.18s ease-in forwards;
+      pointer-events: none;
+    }
+
+    @keyframes sceneNaturalFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes sceneNaturalFadeOut {
+      from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.98);
+      }
     }
 
     /* Retro Pixel Titles */
@@ -1420,7 +1449,150 @@
       }
     }
 
-    /* Top Left BGM Sound Toggle Button */
+    /* Top Left Retro Cassette Sound Player Widget */
+    .retro-cassette-widget {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 100;
+      background: linear-gradient(135deg, rgba(20, 10, 35, 0.92), rgba(45, 15, 60, 0.95));
+      border: 3px solid var(--pixel-pink);
+      border-radius: 8px;
+      box-shadow: 4px 4px 0px #000, 0 0 15px rgba(255, 42, 133, 0.4);
+      padding: 8px 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-family: 'Press Start 2P', monospace;
+      width: 215px;
+    }
+
+    .retro-cassette-widget:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: #ff65b5;
+      box-shadow: 4px 6px 0px #000, 0 0 20px rgba(255, 42, 133, 0.7);
+    }
+
+    .retro-cassette-widget:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .cassette-body {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .cassette-label {
+      background: #fff0f6;
+      border: 2px solid var(--pixel-gold);
+      padding: 3px 6px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .cassette-title {
+      font-size: 7px;
+      color: #9c004b;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cassette-artist {
+      font-size: 5.5px;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .cassette-reels-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #11081f;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      padding: 3px 6px;
+    }
+
+    .cassette-reel {
+      font-size: 13px;
+      display: inline-block;
+      transition: transform 0.1s linear;
+      line-height: 1;
+    }
+
+    .retro-cassette-widget.playing .cassette-reel {
+      animation: spinCassette 2.2s linear infinite;
+    }
+
+    @keyframes spinCassette {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .cassette-tape-window {
+      flex: 1;
+      height: 7px;
+      background: #080310;
+      margin: 0 6px;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 42, 133, 0.3);
+    }
+
+    .tape-strip {
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(90deg, #3a1528, #3a1528 4px, #5c2040 4px, #5c2040 8px);
+    }
+
+    .retro-cassette-widget.playing .tape-strip {
+      animation: moveTape 1s linear infinite;
+    }
+
+    @keyframes moveTape {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 16px 0;
+      }
+    }
+
+    .cassette-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 6px;
+      color: var(--pixel-gold);
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .status-led {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff3344;
+      box-shadow: 0 0 5px #ff3344;
+    }
+
+    .retro-cassette-widget.playing .status-led {
+      background: #00f5d4;
+      box-shadow: 0 0 8px #00f5d4;
+    }
+
+    /* Fallback Toggle Button */
     .bgm-toggle-btn {
       position: fixed;
       top: 14px;
@@ -1439,24 +1611,6 @@
       display: flex;
       align-items: center;
       gap: 6px;
-    }
-
-    .bgm-toggle-btn:hover {
-      background: var(--pixel-pink);
-      color: #ffffff;
-      border-color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    .bgm-toggle-btn:active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0px #000;
-    }
-
-    .bgm-toggle-btn.playing {
-      border-color: var(--pixel-cyan);
-      color: var(--pixel-cyan);
-      box-shadow: 3px 3px 0px #000, 0 0 12px rgba(0, 245, 212, 0.5);
     }
 
     /* ---------- AUTHENTIC RETRO ARCADE CABINET MACHINE ---------- */
@@ -2214,13 +2368,32 @@
     </div>
   </div>
 
-  <!-- Optional Custom MP3 Audio Tag (Isi src="..." jika ingin ganti dengan file MP3 lagu romantis favorit) -->
-  <audio id="customBgm" loop src=""></audio>
+  <!-- Direct BGM Audio Tag (Masukkan file MP3 asli dengan nama 'until-i-found-you.mp3' di folder project ini) -->
+  <audio id="customBgm" loop src="until-i-found-you.mp3"></audio>
 
-  <!-- Top Left BGM Music Control Button -->
-  <button class="bgm-toggle-btn" id="bgmToggleBtn" onclick="toggleBgm()" title="Turn BGM On/Off">
-    🎵 BGM: OFF
-  </button>
+  <!-- Top Left Interactive Retro Cassette Tape Player Widget -->
+  <div class="retro-cassette-widget" id="retroCassetteWidget" onclick="toggleBgm()"
+    title="Klik untuk Putar / Pause Lagu (Until I Found You)">
+    <div class="cassette-body">
+      <div class="cassette-label">
+        <div class="cassette-title">📼 UNTIL I FOUND YOU</div>
+        <div class="cassette-artist">Stephen Sanchez</div>
+      </div>
+      <div class="cassette-reels-container">
+        <div class="cassette-reel reel-left" id="reelLeft">⚙️</div>
+        <div class="cassette-tape-window">
+          <div class="tape-strip"></div>
+        </div>
+        <div class="cassette-reel reel-right" id="reelRight">⚙️</div>
+      </div>
+      <div class="cassette-status">
+        <span class="status-led" id="statusLed"></span>
+        <span class="status-text" id="statusText">TAP TO PLAY 🎵</span>
+      </div>
+    </div>
+  </div>
+
+
 
   <!-- Retro CRT Scanlines & Arcade Horizon Grid -->
   <div class="crt-scanlines"></div>
@@ -2997,38 +3170,39 @@
         initAudio();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-        osc.frequency.setValueAtTime(1760, audioCtx.currentTime + 0.03);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880.00, audioCtx.currentTime + 0.05);
 
-        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0005, audioCtx.currentTime + 0.12);
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.07);
+        osc.stop(audioCtx.currentTime + 0.13);
       } catch (e) { }
     }
 
     function playChiptuneChime() {
       try {
         initAudio();
-        const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98, 2093.00]; // C5 to C7 Level-Up Arpeggio
+        // Fairy Harp / Romantic Celesta Glissando (C5, E5, G5, B5, C6, E6)
+        const notes = [523.25, 659.25, 783.99, 987.77, 1046.50, 1318.51];
         notes.forEach((freq, i) => {
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
-          osc.type = 'square';
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.06);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.05);
 
-          gain.gain.setValueAtTime(0, audioCtx.currentTime + i * 0.06);
-          gain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + i * 0.06 + 0.01);
-          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.06 + 0.35);
+          gain.gain.setValueAtTime(0, audioCtx.currentTime + i * 0.05);
+          gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + i * 0.05 + 0.01);
+          gain.gain.exponentialRampToValueAtTime(0.0003, audioCtx.currentTime + i * 0.05 + 0.45);
 
           osc.connect(gain);
           gain.connect(audioCtx.destination);
-          osc.start(audioCtx.currentTime + i * 0.06);
-          osc.stop(audioCtx.currentTime + i * 0.06 + 0.38);
+          osc.start(audioCtx.currentTime + i * 0.05);
+          osc.stop(audioCtx.currentTime + i * 0.05 + 0.48);
         });
       } catch (e) { }
     }
@@ -3038,17 +3212,17 @@
         initAudio();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(220, audioCtx.currentTime);
-        osc.frequency.linearRampToValueAtTime(80, audioCtx.currentTime + 0.22);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
 
-        gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.22);
+        gain.gain.setValueAtTime(0.07, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0005, audioCtx.currentTime + 0.2);
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.23);
+        osc.stop(audioCtx.currentTime + 0.21);
       } catch (e) { }
     }
 
@@ -3209,12 +3383,33 @@
     let pinLocked = false;
     let pinVerified = false;
 
+    /* Ultra Clean Natural Scene Switcher */
+    function switchScene(fromId, toId, callback) {
+      const fromEl = typeof fromId === 'string' ? document.getElementById(fromId) : fromId;
+      const toEl = typeof toId === 'string' ? document.getElementById(toId) : toId;
+
+      if (!fromEl || !toEl || fromEl === toEl) {
+        if (toEl) {
+          toEl.classList.add('active');
+          if (callback) callback();
+        }
+        return;
+      }
+
+      fromEl.classList.add('exiting');
+
+      setTimeout(() => {
+        fromEl.classList.remove('active', 'exiting');
+        toEl.classList.add('active');
+        if (callback) callback();
+      }, 150);
+    }
+
     function openEnvelope() {
       initAudio();
       if (!pinVerified) {
         playChiptuneBeep();
-        document.getElementById('scene-envelope').classList.remove('active');
-        document.getElementById('scene-pin').classList.add('active');
+        switchScene('scene-envelope', 'scene-pin');
         return;
       }
       playChiptuneChime();
@@ -3225,10 +3420,8 @@
       launchBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 50);
 
       setTimeout(() => {
-        document.getElementById('scene-envelope').classList.remove('active');
-        const scene2 = document.getElementById('scene-question');
-        scene2.classList.add('active');
-      }, 900);
+        switchScene('scene-envelope', 'scene-question');
+      }, 750);
     }
 
     function pressPin(digit) {
@@ -3305,9 +3498,9 @@
         launchBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 50);
 
         setTimeout(() => {
-          document.getElementById('scene-pin').classList.remove('active');
-          document.getElementById('scene-envelope').classList.add('active');
-          openEnvelope();
+          switchScene('scene-pin', 'scene-envelope', () => {
+            openEnvelope();
+          });
         }, 750);
 
       } else {
@@ -3429,12 +3622,11 @@
       setTimeout(() => launchBurst(window.innerWidth * 0.2, window.innerHeight * 0.3, 60), 300);
       setTimeout(() => launchBurst(window.innerWidth * 0.8, window.innerHeight * 0.3, 60), 600);
 
-      document.getElementById('scene-question').classList.remove('active');
-      document.getElementById('scene-reveal').classList.add('active');
-
-      startCountdown();
-      setupActionLinks();
-      setTimeout(initArcadeMiniGame, 600);
+      switchScene('scene-question', 'scene-reveal', () => {
+        startCountdown();
+        setupActionLinks();
+        setTimeout(initArcadeMiniGame, 600);
+      });
     }
 
     /* ===================================================
@@ -3535,14 +3727,14 @@
       const sweetNoteEl = document.getElementById('sweetReplyInput');
       const sweetNoteVal = sweetNoteEl ? sweetNoteEl.value.trim() : "";
 
-      let fullWaText = "Hai sayang! Aku mau banget ngedate sama kamu hari Minggu, 6 September nanti! 🥰✨ Nggak sabar main ke Timezone & makan udon bareng 💖";
+      let fullWaText = "Hai seng! Aku mau banget ngedate sama kamu hari Minggu, 6 September nanti! 🥰✨ Makasih loh udah ngajak ngedatee. cantt wait to see youu💖";
 
       if (allAgendas.length > 0) {
         fullWaText += "\n\n✨ Aku juga nambahin agenda impianku ya:\n" + allAgendas.map((a, i) => `${i + 1}. ${a}`).join('\n');
       }
 
       if (sweetNoteVal) {
-        fullWaText += `\n\n💌 Pesan Balasan Manisku:\n"${sweetNoteVal}"`;
+        fullWaText += `\n\n💌 Feedback dari aku:\n"${sweetNoteVal}"`;
       }
 
       const waMsg = encodeURIComponent(fullWaText);
@@ -3640,19 +3832,19 @@
         initAudio();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = 'sawtooth';
+        osc.type = 'triangle';
 
-        // Sad whimpering slide pitch 380Hz -> 180Hz
-        osc.frequency.setValueAtTime(380, audioCtx.currentTime);
-        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.35);
+        // Gentle soft whimpering slide pitch 360Hz -> 200Hz
+        osc.frequency.setValueAtTime(360, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(200, audioCtx.currentTime + 0.32);
 
-        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
+        gain.gain.setValueAtTime(0.07, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0005, audioCtx.currentTime + 0.32);
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.36);
+        osc.stop(audioCtx.currentTime + 0.33);
       } catch (e) { }
     }
 
@@ -3689,81 +3881,65 @@
     let bgmStep = 0;
 
     const M_NOTES = {
-      C3: 130.81, E3: 164.81, F3: 174.61, G3: 196.00, A3: 220.00, B3: 246.94,
+      C3: 130.81, D3: 146.83, E3: 164.81, F3: 174.61, G3: 196.00, A3: 220.00, B3: 246.94,
       C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00, B4: 493.88,
       C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99, A5: 880.00, B5: 987.77,
       C6: 1046.50, D6: 1174.66, E6: 1318.51, REST: 0
     };
 
-    // Deeply Romantic Ballad Sequence ("Can't Help Falling in Love" & "Canon in D" Acoustic Music Box)
+    // Deeply Romantic Sequence ("Until I Found You" - Stephen Sanchez Acoustic Music Box)
     const romanticBgmSequence = [
-      // Verse: "Wise men say, only fools rush in..."
-      { note: M_NOTES.G4, bass: M_NOTES.C3, duration: 0.5 },
-      { note: M_NOTES.C5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.G5, bass: 0, duration: 1.1 },
+      // Verse: "Georgia, wrap me up in all your... I want you in my arms..."
+      { note: M_NOTES.E5, bass: M_NOTES.C3, duration: 0.4 },
+      { note: M_NOTES.D5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.C5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.E5, bass: M_NOTES.G3, duration: 0.8 },
 
-      { note: M_NOTES.B5, bass: M_NOTES.E3, duration: 0.5 },
-      { note: M_NOTES.A5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.G5, bass: M_NOTES.A3, duration: 0.5 },
-      { note: M_NOTES.A5, bass: 0, duration: 1.1 },
+      { note: M_NOTES.G5, bass: M_NOTES.E3, duration: 0.4 },
+      { note: M_NOTES.E5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.D5, bass: M_NOTES.A3, duration: 0.4 },
+      { note: M_NOTES.C5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.D5, bass: M_NOTES.F3, duration: 0.4 },
+      { note: M_NOTES.E5, bass: 0, duration: 0.8 },
 
-      { note: M_NOTES.F5, bass: M_NOTES.F3, duration: 0.5 },
-      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.D5, bass: M_NOTES.C3, duration: 0.5 },
-      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.F5, bass: M_NOTES.G3, duration: 0.5 },
-      { note: M_NOTES.G5, bass: 0, duration: 1.1 },
-
-      { note: M_NOTES.E5, bass: M_NOTES.C3, duration: 0.5 },
-      { note: M_NOTES.D5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.C5, bass: M_NOTES.G3, duration: 1.3 },
-
-      // Chorus: "But I can't help falling in love with you..."
-      { note: M_NOTES.G4, bass: M_NOTES.C3, duration: 0.5 },
-      { note: M_NOTES.C5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.G5, bass: 0, duration: 1.1 },
-
-      { note: M_NOTES.B5, bass: M_NOTES.E3, duration: 0.5 },
-      { note: M_NOTES.A5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.G5, bass: M_NOTES.A3, duration: 0.5 },
-      { note: M_NOTES.A5, bass: 0, duration: 1.1 },
-
-      { note: M_NOTES.F5, bass: M_NOTES.F3, duration: 0.5 },
-      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.D5, bass: M_NOTES.C3, duration: 0.5 },
-      { note: M_NOTES.E5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.F5, bass: M_NOTES.G3, duration: 0.5 },
-      { note: M_NOTES.G5, bass: 0, duration: 1.1 },
-
-      { note: M_NOTES.E5, bass: M_NOTES.C3, duration: 0.5 },
-      { note: M_NOTES.D5, bass: M_NOTES.G3, duration: 0.5 },
-      { note: M_NOTES.C5, bass: M_NOTES.C3, duration: 1.5 },
-
-      // Bridge: "Like a river flows, surely to the sea..."
-      { note: M_NOTES.E5, bass: M_NOTES.E3, duration: 0.4 },
-      { note: M_NOTES.B5, bass: 0, duration: 0.4 },
-      { note: M_NOTES.G5, bass: 0, duration: 0.4 },
-      { note: M_NOTES.E5, bass: M_NOTES.A3, duration: 0.4 },
-      { note: M_NOTES.B5, bass: 0, duration: 0.4 },
-      { note: M_NOTES.G5, bass: 0, duration: 0.4 },
-
-      { note: M_NOTES.E5, bass: M_NOTES.F3, duration: 0.4 },
-      { note: M_NOTES.C6, bass: 0, duration: 0.4 },
-      { note: M_NOTES.A5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.C5, bass: M_NOTES.C3, duration: 0.4 },
+      { note: M_NOTES.E5, bass: 0, duration: 0.4 },
       { note: M_NOTES.D5, bass: M_NOTES.G3, duration: 0.4 },
-      { note: M_NOTES.B5, bass: 0, duration: 0.4 },
-      { note: M_NOTES.G5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.C5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.E5, bass: M_NOTES.A3, duration: 0.4 },
+      { note: M_NOTES.G5, bass: 0, duration: 0.8 },
 
-      // Outro / Resolving Cadence
-      { note: M_NOTES.C6, bass: M_NOTES.F3, duration: 0.5 },
-      { note: M_NOTES.B5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.A5, bass: M_NOTES.G3, duration: 0.5 },
-      { note: M_NOTES.G5, bass: 0, duration: 0.5 },
-      { note: M_NOTES.E5, bass: M_NOTES.C3, duration: 0.6 },
-      { note: M_NOTES.D5, bass: 0, duration: 0.6 },
-      { note: M_NOTES.C5, bass: M_NOTES.C3, duration: 1.8 }
+      { note: M_NOTES.A5, bass: M_NOTES.F3, duration: 0.4 },
+      { note: M_NOTES.G5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.E5, bass: M_NOTES.G3, duration: 0.4 },
+      { note: M_NOTES.D5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.C5, bass: M_NOTES.C3, duration: 1.2 },
+
+      // Chorus: "I would never fall in love... Until I Found You..."
+      { note: M_NOTES.G5, bass: M_NOTES.C3, duration: 0.45 },
+      { note: M_NOTES.A5, bass: 0, duration: 0.45 },
+      { note: M_NOTES.G5, bass: M_NOTES.E3, duration: 0.45 },
+      { note: M_NOTES.E5, bass: 0, duration: 0.45 },
+      { note: M_NOTES.D5, bass: M_NOTES.A3, duration: 0.45 },
+      { note: M_NOTES.C5, bass: 0, duration: 0.45 },
+
+      { note: M_NOTES.D5, bass: M_NOTES.F3, duration: 0.45 },
+      { note: M_NOTES.E5, bass: M_NOTES.G3, duration: 0.45 },
+      { note: M_NOTES.C5, bass: M_NOTES.C3, duration: 1.4 },
+
+      // Hook 2: "I said I would never fall unless it's with you..."
+      { note: M_NOTES.G5, bass: M_NOTES.C3, duration: 0.4 },
+      { note: M_NOTES.A5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.C6, bass: M_NOTES.E3, duration: 0.4 },
+      { note: M_NOTES.B5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.A5, bass: M_NOTES.F3, duration: 0.4 },
+      { note: M_NOTES.G5, bass: 0, duration: 0.8 },
+
+      { note: M_NOTES.E5, bass: M_NOTES.A3, duration: 0.4 },
+      { note: M_NOTES.F5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.E5, bass: M_NOTES.G3, duration: 0.4 },
+      { note: M_NOTES.D5, bass: 0, duration: 0.4 },
+      { note: M_NOTES.C5, bass: M_NOTES.C3, duration: 1.6 }
     ];
 
     function startBgm() {
@@ -3774,10 +3950,15 @@
       updateBgmBtn();
 
       const customAudio = document.getElementById('customBgm');
-      if (customAudio && customAudio.src && customAudio.src !== window.location.href) {
-        customAudio.play().catch(() => {
-          playNextBgmNote();
-        });
+      if (customAudio && customAudio.src && customAudio.src !== window.location.href && customAudio.src !== window.location.origin + '/') {
+        customAudio.volume = 0.5;
+        const playPromise = customAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((err) => {
+            console.log("Audio play blocked or offline, using Until I Found You Web Audio synth", err);
+            playNextBgmNote();
+          });
+        }
       } else {
         playNextBgmNote();
       }
@@ -3811,7 +3992,20 @@
     document.addEventListener('touchstart', autoStartBgm, { once: true });
 
     function updateBgmBtn() {
+      const widget = document.getElementById('retroCassetteWidget');
+      const text = document.getElementById('statusText');
       const btn = document.getElementById('bgmToggleBtn');
+
+      if (widget) {
+        if (isBgmPlaying) {
+          widget.classList.add('playing');
+          if (text) text.innerHTML = 'NOW PLAYING 🎵';
+        } else {
+          widget.classList.remove('playing');
+          if (text) text.innerHTML = 'TAP TO PLAY 📼';
+        }
+      }
+
       if (btn) {
         if (isBgmPlaying) {
           btn.innerHTML = '🎵 BGM: ON';
@@ -3830,33 +4024,39 @@
         bgmStep++;
 
         if (item.note > 0) {
-          // Main Melody Oscillator (Sine - Warm Music Box)
+          // Warm Lowpass filter for smooth acoustic tone
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(2200, audioCtx.currentTime);
+          filter.connect(audioCtx.destination);
+
+          // Main Melody Oscillator (Sine - Warm Romantic Music Box)
           const osc1 = audioCtx.createOscillator();
           const gain1 = audioCtx.createGain();
           osc1.type = 'sine';
           osc1.frequency.setValueAtTime(item.note, audioCtx.currentTime);
 
-          gain1.gain.setValueAtTime(0.08, audioCtx.currentTime);
-          gain1.gain.exponentialRampToValueAtTime(0.0002, audioCtx.currentTime + item.duration * 1.8);
+          gain1.gain.setValueAtTime(0.07, audioCtx.currentTime);
+          gain1.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + item.duration * 2.0);
 
           osc1.connect(gain1);
-          gain1.connect(audioCtx.destination);
+          gain1.connect(filter);
           osc1.start();
-          osc1.stop(audioCtx.currentTime + item.duration * 1.9);
+          osc1.stop(audioCtx.currentTime + item.duration * 2.1);
 
-          // Subtle Sparkle Harmonic Bell (+1 Octave)
+          // Subtle Sparkle Harp Harmonic Bell (+1 Octave)
           const osc2 = audioCtx.createOscillator();
           const gain2 = audioCtx.createGain();
           osc2.type = 'sine';
           osc2.frequency.setValueAtTime(item.note * 2, audioCtx.currentTime);
 
-          gain2.gain.setValueAtTime(0.02, audioCtx.currentTime);
-          gain2.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + item.duration * 1.2);
+          gain2.gain.setValueAtTime(0.018, audioCtx.currentTime);
+          gain2.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + item.duration * 1.4);
 
           osc2.connect(gain2);
-          gain2.connect(audioCtx.destination);
+          gain2.connect(filter);
           osc2.start();
-          osc2.stop(audioCtx.currentTime + item.duration * 1.3);
+          osc2.stop(audioCtx.currentTime + item.duration * 1.5);
         }
 
         // Deep Warm Accompaniment Bass (Triangle)
@@ -3866,13 +4066,13 @@
           bassOsc.type = 'triangle';
           bassOsc.frequency.setValueAtTime(item.bass, audioCtx.currentTime);
 
-          bassGain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-          bassGain.gain.exponentialRampToValueAtTime(0.0005, audioCtx.currentTime + 1.8);
+          bassGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+          bassGain.gain.exponentialRampToValueAtTime(0.0004, audioCtx.currentTime + 2.0);
 
           bassOsc.connect(bassGain);
           bassGain.connect(audioCtx.destination);
           bassOsc.start();
-          bassOsc.stop(audioCtx.currentTime + 1.9);
+          bassOsc.stop(audioCtx.currentTime + 2.1);
         }
 
         bgmTimer = setTimeout(playNextBgmNote, item.duration * 1000);
@@ -3936,16 +4136,16 @@ I love you so much!💖`;
         if (!audioCtx) return;
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(1200 + Math.random() * 200, audioCtx.currentTime);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1000 + Math.random() * 150, audioCtx.currentTime);
 
-        gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.02);
+        gain.gain.setValueAtTime(0.008, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0003, audioCtx.currentTime + 0.025);
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.025);
+        osc.stop(audioCtx.currentTime + 0.03);
       } catch (e) { }
     }
 
