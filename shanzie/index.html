@@ -2368,8 +2368,8 @@
     </div>
   </div>
 
-  <!-- Direct BGM Audio Tag (Masukkan file MP3 asli dengan nama 'until-i-found-you.mp3' di folder project ini) -->
-  <audio id="customBgm" loop src="until-i-found-you.mp3"></audio>
+  <!-- Direct BGM Audio Tag (Terpasang lagu asli Stephen Sanchez - Until I Found You) -->
+  <audio id="customBgm" loop src="until-i-found-you.mp3" preload="auto" playsinline webkit-playsinline></audio>
 
   <!-- Top Left Interactive Retro Cassette Tape Player Widget -->
   <div class="retro-cassette-widget" id="retroCassetteWidget" onclick="toggleBgm()"
@@ -3942,26 +3942,82 @@
       { note: M_NOTES.C5, bass: M_NOTES.C3, duration: 1.6 }
     ];
 
+    // Warm up audio buffer on mobile touch/click
+    function warmUpAudio() {
+      const customAudio = document.getElementById('customBgm');
+      if (customAudio) {
+        customAudio.load();
+      }
+    }
+    document.addEventListener('touchstart', warmUpAudio, { once: true, passive: true });
+    document.addEventListener('click', warmUpAudio, { once: true, passive: true });
+
     function startBgm() {
       if (isBgmPlaying) return;
       initAudio();
-      isBgmPlaying = true;
       bgmStep = 0;
-      updateBgmBtn();
 
       const customAudio = document.getElementById('customBgm');
       if (customAudio && customAudio.src && customAudio.src !== window.location.href && customAudio.src !== window.location.origin + '/') {
         customAudio.volume = 0.5;
+
         const playPromise = customAudio.play();
         if (playPromise !== undefined) {
-          playPromise.catch((err) => {
-            console.log("Audio play blocked or offline, using Until I Found You Web Audio synth", err);
-            playNextBgmNote();
+          playPromise.then(() => {
+            isBgmPlaying = true;
+            clearTimeout(bgmTimer);
+            updateBgmBtn();
+          }).catch((err) => {
+            console.warn("Mobile audio promise buffering, retrying MP3...", err);
+
+            const handleMobilePlay = () => {
+              customAudio.removeEventListener('canplay', handleMobilePlay);
+              customAudio.removeEventListener('canplaythrough', handleMobilePlay);
+              if (!customAudio.paused) return;
+              customAudio.play().then(() => {
+                isBgmPlaying = true;
+                clearTimeout(bgmTimer);
+                updateBgmBtn();
+              }).catch(() => {
+                if (!isBgmPlaying) startSynthFallback();
+              });
+            };
+
+            customAudio.addEventListener('canplay', handleMobilePlay, { once: true });
+            customAudio.addEventListener('canplaythrough', handleMobilePlay, { once: true });
+
+            // Mark playing state visually while buffering on mobile
+            isBgmPlaying = true;
+            updateBgmBtn();
+
+            // Retry after 180ms for mobile network buffer
+            setTimeout(() => {
+              if (customAudio.paused) {
+                customAudio.play().then(() => {
+                  clearTimeout(bgmTimer);
+                }).catch(() => {
+                  if (customAudio.error) {
+                    startSynthFallback();
+                  }
+                });
+              }
+            }, 180);
           });
+        } else {
+          isBgmPlaying = true;
+          updateBgmBtn();
         }
       } else {
-        playNextBgmNote();
+        startSynthFallback();
       }
+    }
+
+    function startSynthFallback() {
+      const customAudio = document.getElementById('customBgm');
+      if (customAudio && !customAudio.paused) return;
+      isBgmPlaying = true;
+      updateBgmBtn();
+      playNextBgmNote();
     }
 
     function stopBgm() {
