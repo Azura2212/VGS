@@ -1453,7 +1453,7 @@
         margin-top: 42px;
       }
 
-      /* Compact Mobile Cassette Player Mode */
+      /* Compact Mobile Cassette Player & Auto-Hide Side Drawer Mode */
       .retro-cassette-widget {
         top: 8px;
         left: 8px;
@@ -1462,6 +1462,71 @@
         padding: 4px 6px;
         border-width: 2px;
         box-shadow: 2px 2px 0px #000, 0 0 10px rgba(255, 42, 133, 0.4);
+        transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+      }
+
+      /* Auto-Hide State on Mobile Scroll: Slides left offscreen */
+      .retro-cassette-widget.minimized {
+        transform: translateX(calc(-100% - 10px));
+        pointer-events: none;
+      }
+
+      /* Expanded State when side tab is tapped on Mobile */
+      .retro-cassette-widget.minimized.expanded {
+        transform: translateX(0);
+        pointer-events: auto;
+        box-shadow: 4px 6px 0px #000, 0 0 20px rgba(255, 42, 133, 0.8);
+      }
+
+      /* Glowing Side Bar Tab sticking out on left edge when minimized */
+      .retro-cassette-widget .cassette-side-handle {
+        display: flex;
+        position: absolute;
+        left: calc(100% + 4px);
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(135deg, rgba(30, 10, 45, 0.95), rgba(65, 15, 85, 0.95));
+        border: 2px solid var(--pixel-pink);
+        border-left: none;
+        border-radius: 0 8px 8px 0;
+        padding: 6px 6px;
+        cursor: pointer;
+        user-select: none;
+        pointer-events: auto;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        box-shadow: 3px 3px 0px #000, 0 0 12px rgba(255, 42, 133, 0.6);
+        transition: all 0.2s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .retro-cassette-widget.minimized .cassette-side-handle {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .cassette-side-handle:active {
+        transform: translateY(-50%) scale(0.95);
+      }
+
+      .handle-icon {
+        font-size: 13px;
+        line-height: 1;
+      }
+
+      .handle-led {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #ff3344;
+        box-shadow: 0 0 5px #ff3344;
+      }
+
+      .retro-cassette-widget.playing .handle-led {
+        background: #00f5d4;
+        box-shadow: 0 0 8px #00f5d4;
       }
 
       .cassette-body {
@@ -2436,8 +2501,14 @@
   <audio id="customBgm" loop src="until-i-found-you.mp3" preload="auto" playsinline webkit-playsinline></audio>
 
   <!-- Top Left Interactive Retro Cassette Tape Player Widget -->
-  <div class="retro-cassette-widget" id="retroCassetteWidget" onclick="toggleBgm()"
+  <div class="retro-cassette-widget" id="retroCassetteWidget" onclick="handleCassetteClick(event)"
     title="Klik untuk Putar / Pause Lagu (Until I Found You)">
+    <!-- Side Bar Tab Handle (Visibly sticks out on left edge when scrolled down on Mobile) -->
+    <div class="cassette-side-handle" id="cassetteSideHandle" onclick="toggleCassetteExpand(event)"
+      title="Buka Player Musik">
+      <span class="handle-icon">📼</span>
+      <span class="handle-led" id="handleLed"></span>
+    </div>
     <div class="cassette-body">
       <div class="cassette-label">
         <div class="cassette-title">📼 UNTIL I FOUND YOU</div>
@@ -4111,10 +4182,57 @@
     document.addEventListener('click', autoStartBgm, { once: true });
     document.addEventListener('touchstart', autoStartBgm, { once: true });
 
+    let isCassetteExpanded = false;
+
+    // Mobile scroll auto-hide side bar listener
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth > 600) return;
+      const widget = document.getElementById('retroCassetteWidget');
+      if (!widget) return;
+
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > 60) {
+        if (!isCassetteExpanded) {
+          widget.classList.add('minimized');
+        }
+      } else {
+        widget.classList.remove('minimized', 'expanded');
+        isCassetteExpanded = false;
+      }
+    }, { passive: true });
+
+    function toggleCassetteExpand(e) {
+      if (e) e.stopPropagation();
+      const widget = document.getElementById('retroCassetteWidget');
+      if (!widget) return;
+
+      if (widget.classList.contains('minimized')) {
+        if (widget.classList.contains('expanded')) {
+          widget.classList.remove('expanded');
+          isCassetteExpanded = false;
+        } else {
+          widget.classList.add('expanded');
+          isCassetteExpanded = true;
+        }
+      } else {
+        toggleBgm();
+      }
+    }
+
+    function handleCassetteClick(e) {
+      const widget = document.getElementById('retroCassetteWidget');
+      if (widget && widget.classList.contains('minimized') && !widget.classList.contains('expanded')) {
+        toggleCassetteExpand(e);
+      } else {
+        toggleBgm();
+      }
+    }
+
     function updateBgmBtn() {
       const widget = document.getElementById('retroCassetteWidget');
       const text = document.getElementById('statusText');
       const btn = document.getElementById('bgmToggleBtn');
+      const handleLed = document.getElementById('handleLed');
 
       if (widget) {
         if (isBgmPlaying) {
@@ -4123,6 +4241,16 @@
         } else {
           widget.classList.remove('playing');
           if (text) text.innerHTML = 'TAP TO PLAY 📼';
+        }
+      }
+
+      if (handleLed) {
+        if (isBgmPlaying) {
+          handleLed.style.background = '#00f5d4';
+          handleLed.style.boxShadow = '0 0 8px #00f5d4';
+        } else {
+          handleLed.style.background = '#ff3344';
+          handleLed.style.boxShadow = '0 0 5px #ff3344';
         }
       }
 
@@ -4210,9 +4338,9 @@
 
 Makasih ya udah mau jalan sama aku haha seneng banget loh aku ngeplan ini semoga suka ya sama yang aku buat.
 
-Seru-seruan kita nanti, habisin waktu bareng, dengerin cerita kamu! Aku mau kamu happy seng, aku mau kamu tau aku pasti ada buat kamu
+Nanti kita puas-puasin ya habisin waktu bareng, dengerin cerita kamu! I want you to be the happiest, Sygg, aku pengen kamu tahu kalau aku bakal selalu usahain ada buat kamu
 
-I love you so much!💖`;
+Love youuu💖`;
 
     let letterTypeIndex = 0;
     let letterTypeTimer = null;
