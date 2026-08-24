@@ -2045,6 +2045,77 @@
     }
 
     /* ---------- ARCADE MINI-GAME STYLES ---------- */
+    .arcade-start-overlay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 140px;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+      background: rgba(8, 2, 18, 0.95);
+      border: 2px dashed var(--pixel-pink);
+      padding: 10px;
+      gap: 8px;
+      border-radius: 4px;
+    }
+
+    .arcade-start-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--pixel-gold);
+      text-shadow: 2px 2px 0px #000, 0 0 8px rgba(255, 215, 0, 0.6);
+    }
+
+    .arcade-start-subtitle {
+      font-family: 'Pixelify Sans', cursive, sans-serif;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .btn-arcade-start-overlay {
+      background: var(--pixel-pink);
+      border: 2px solid var(--pixel-gold);
+      box-shadow: 3px 3px 0px #000, 0 0 10px rgba(255, 42, 133, 0.6);
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9.5px;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-top: 4px;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      animation: blinkBtn 1s infinite alternate;
+    }
+
+    .btn-arcade-start-overlay:hover {
+      background: #ff4797;
+      transform: scale(1.05);
+      box-shadow: 3px 3px 0px #000, 0 0 15px rgba(255, 42, 133, 0.9);
+    }
+
+    .btn-arcade-start-overlay:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    @keyframes blinkBtn {
+      0% {
+        opacity: 0.85;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1.03);
+      }
+    }
+
     .arcade-game-hud {
       display: flex;
       justify-content: space-between;
@@ -3176,9 +3247,18 @@
               </div>
 
               <div class="arcade-crt-display">
+                <!-- Retro Start Screen Overlay (Shown initially before game starts) -->
+                <div class="arcade-start-overlay" id="arcadeStartOverlay">
+                  <div class="arcade-start-title">🕹️ STAGE 1 💌</div>
+                  <p class="arcade-start-subtitle">Tangkap 5 Hati buat buka Surat Rahasia! 💕</p>
+                  <button type="button" class="btn-arcade-start-overlay" onclick="initArcadeMiniGame()">
+                    <span>▶</span> PLAY GAME
+                  </button>
+                </div>
+
                 <!-- Mini-Game Area -->
-                <div class="arcade-game-area" id="arcadeGameArea" onmousemove="handleGameTouch(event)"
-                  ontouchmove="handleGameTouch(event)">
+                <div class="arcade-game-area" id="arcadeGameArea" style="display: none;"
+                  onmousemove="handleGameTouch(event)" ontouchmove="handleGameTouch(event)">
                   <div class="arcade-game-hud">
                     <span>STAGE 1: CATCH 5 HEARTS</span>
                     <span>SCORE: <span id="arcadeScoreVal" style="color: var(--pixel-gold);">0</span>/5</span>
@@ -3943,7 +4023,6 @@
       switchScene('scene-question', 'scene-reveal', () => {
         startCountdown();
         setupActionLinks();
-        setTimeout(initArcadeMiniGame, 600);
       });
     }
 
@@ -4643,6 +4722,15 @@ Love youuu💖`;
       gameScore = 0;
       gameBasketX = 50;
 
+      const startOverlay = document.getElementById('arcadeStartOverlay');
+      if (startOverlay) startOverlay.style.display = 'none';
+
+      const lockDisplay = document.getElementById('arcadeLockDisplay');
+      if (lockDisplay) lockDisplay.style.display = 'none';
+
+      const letterDisplay = document.getElementById('arcadeLetterDisplay');
+      if (letterDisplay) letterDisplay.style.display = 'none';
+
       const area = document.getElementById('arcadeGameArea');
       if (area) {
         const existingHearts = area.querySelectorAll('.falling-heart');
@@ -4654,7 +4742,6 @@ Love youuu💖`;
       document.getElementById('arcadeScoreVal').textContent = '0';
       document.getElementById('arcadeGameOverlay').classList.remove('active');
       document.getElementById('arcadeGameArea').style.display = 'block';
-      document.getElementById('arcadeLetterDisplay').style.display = 'none';
 
       updateBasketPosition();
       spawnFallingHeart();
@@ -4812,6 +4899,9 @@ Love youuu💖`;
     function switchToLetterDisplay() {
       isMiniGameActive = false;
       if (gameAnimationId) cancelAnimationFrame(gameAnimationId);
+
+      const startOverlay = document.getElementById('arcadeStartOverlay');
+      if (startOverlay) startOverlay.style.display = 'none';
 
       document.getElementById('arcadeGameArea').style.display = 'none';
       const lockDisp = document.getElementById('arcadeLockDisplay');
