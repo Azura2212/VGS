@@ -1447,6 +1447,70 @@
       .side-pixel-decor {
         display: none;
       }
+
+      /* Roomy headroom on mobile so top fixed widgets never overlap cards or mascot */
+      .app-container {
+        margin-top: 42px;
+      }
+
+      /* Compact Mobile Cassette Player Mode */
+      .retro-cassette-widget {
+        top: 8px;
+        left: 8px;
+        width: auto;
+        max-width: 160px;
+        padding: 4px 6px;
+        border-width: 2px;
+        box-shadow: 2px 2px 0px #000, 0 0 10px rgba(255, 42, 133, 0.4);
+      }
+
+      .cassette-body {
+        gap: 3px;
+      }
+
+      .cassette-label {
+        padding: 2px 4px;
+        border-width: 1.5px;
+      }
+
+      .cassette-title {
+        font-size: 6px;
+      }
+
+      .cassette-artist {
+        font-size: 4.8px;
+        margin-top: 1px;
+      }
+
+      .cassette-reels-container {
+        padding: 2px 4px;
+        border-width: 1px;
+      }
+
+      .cassette-reel {
+        font-size: 9px;
+      }
+
+      .cassette-tape-window {
+        height: 5px;
+        margin: 0 4px;
+      }
+
+      .cassette-status {
+        font-size: 5px;
+        gap: 4px;
+        margin-top: 0px;
+      }
+
+      .status-led {
+        width: 4px;
+        height: 4px;
+      }
+
+      .pixel-cat-mascot {
+        top: -24px;
+        right: 8px;
+      }
     }
 
     /* Top Left Retro Cassette Sound Player Widget */
