@@ -3776,8 +3776,8 @@
       dodgeNote.textContent = notes[noteIdx % notes.length];
       noteIdx++;
 
-      yesScale += 0.05;
-      const maxScaleCap = window.innerWidth <= 600 ? 1.12 : 1.3;
+      yesScale += 0.08;
+      const maxScaleCap = window.innerWidth <= 600 ? 1.28 : 1.45;
       if (yesScale > maxScaleCap) yesScale = maxScaleCap;
       btnYes.style.transform = `scale(${yesScale})`;
     }
@@ -3915,7 +3915,7 @@
       let fullWaText = "Hai seng! Aku mau banget ngedate sama kamu hari Minggu, 6 September nanti! 🥰✨ Makasih loh udah ngajak ngedatee. cantt wait to see youu💖";
 
       if (allAgendas.length > 0) {
-        fullWaText += "\n\n✨ Aku juga nambahin agenda impianku ya:\n" + allAgendas.map((a, i) => `${i + 1}. ${a}`).join('\n');
+        fullWaText += "\n\n✨ Aku mauu:\n" + allAgendas.map((a, i) => `${i + 1}. ${a}`).join('\n');
       }
 
       if (sweetNoteVal) {
