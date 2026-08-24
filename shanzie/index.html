@@ -1036,6 +1036,109 @@
       box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.8), 0 0 8px rgba(255, 215, 0, 0.4);
     }
 
+    /* Dresscode Selector Box */
+    .dresscode-box {
+      margin-top: 16px;
+      background: rgba(15, 5, 29, 0.95);
+      border: 3px solid var(--pixel-pink);
+      box-shadow: 4px 4px 0px #000;
+      padding: 12px 14px;
+      border-radius: 4px;
+    }
+
+    .dresscode-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8.5px;
+      color: var(--pixel-gold);
+      margin-bottom: 10px;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dresscode-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .dresscode-chip {
+      background: rgba(42, 18, 70, 0.9);
+      border: 2px solid var(--pixel-pink-glow);
+      color: var(--text-light);
+      font-family: 'Pixelify Sans', cursive, sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .dresscode-chip:hover {
+      background: rgba(255, 42, 133, 0.35);
+      border-color: var(--pixel-gold);
+      transform: translateY(-1px);
+    }
+
+    .dresscode-chip:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    .dresscode-chip.active {
+      background: var(--pixel-pink);
+      color: #ffffff;
+      border-color: var(--pixel-gold);
+      box-shadow: 2px 2px 0px #000, 0 0 10px rgba(255, 42, 133, 0.5);
+      font-weight: 700;
+    }
+
+    .dresscode-couple-wrap {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(255, 117, 181, 0.4);
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .dresscode-couple-label {
+      display: block;
+      font-family: 'Pixelify Sans', cursive, sans-serif;
+      font-size: 12.5px;
+      color: var(--pixel-pink-glow);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .dresscode-couple-input {
+      width: 100%;
+      background: #000000;
+      border: 2px solid var(--pixel-cyan);
+      box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      font-family: 'Pixelify Sans', cursive, sans-serif;
+      font-size: 13.5px;
+      padding: 8px 10px;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .dresscode-couple-input::placeholder {
+      color: rgba(255, 204, 213, 0.6);
+      font-size: 12px;
+    }
+
+    .dresscode-couple-input:focus {
+      border-color: var(--pixel-gold);
+      box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.8), 0 0 8px rgba(255, 215, 0, 0.4);
+    }
+
 
 
     /* Action Buttons Grid */
@@ -3233,6 +3336,36 @@
           </div>
         </div>
 
+        <!-- Dresscode Selector Box -->
+        <div class="dresscode-box">
+          <div class="dresscode-title"><span></span> Dress code-nya?</div>
+          <div class="dresscode-options">
+            <button type="button" class="dresscode-chip active" data-value="Casual" onclick="selectDresscode('Casual')">
+              <span></span> Casual
+            </button>
+            <button type="button" class="dresscode-chip" data-value="Couple" onclick="selectDresscode('Couple')">
+              <span></span> Couple
+            </button>
+            <button type="button" class="dresscode-chip" data-value="Semi-Formal"
+              onclick="selectDresscode('Semi-Formal')">
+              <span></span> Semi-Formal
+            </button>
+            <button type="button" class="dresscode-chip" data-value="Formal" onclick="selectDresscode('Formal')">
+              <span></span> Formal
+            </button>
+            <button type="button" class="dresscode-chip" data-value="Bebas" onclick="selectDresscode('Bebas')">
+              <span></span> Bebas
+            </button>
+          </div>
+
+          <!-- Couple Extra Detail Input (Visible when 'Couple' selected) -->
+          <div class="dresscode-couple-wrap" id="dresscodeCoupleWrap" style="display: none;">
+            <label class="dresscode-couple-label" for="dresscodeCoupleInput">✨ Coba kasih detaill:</label>
+            <input type="text" id="dresscodeCoupleInput" class="dresscode-couple-input"
+              placeholder="Colors?? atau matching outfit mungkin..." maxlength="80" oninput="setupActionLinks()">
+          </div>
+        </div>
+
         <!-- Special Sweet Reply Feedback Box -->
         <div class="sweet-reply-box">
           <div class="sweet-reply-title"><span>💌</span> Feedbacknya kakaaa..</div>
@@ -3900,6 +4033,37 @@
       setupActionLinks();
     }
 
+    /* ===================================================
+       DRESSCODE SELECTION SYSTEM
+       =================================================== */
+    let selectedDresscode = 'Casual';
+
+    function selectDresscode(val) {
+      selectedDresscode = val;
+      const chips = document.querySelectorAll('.dresscode-chip');
+      chips.forEach(chip => {
+        if (chip.getAttribute('data-value') === val) {
+          chip.classList.add('active');
+        } else {
+          chip.classList.remove('active');
+        }
+      });
+
+      const coupleWrap = document.getElementById('dresscodeCoupleWrap');
+      if (coupleWrap) {
+        if (val === 'Couple') {
+          coupleWrap.style.display = 'block';
+          const coupleInput = document.getElementById('dresscodeCoupleInput');
+          if (coupleInput) coupleInput.focus();
+        } else {
+          coupleWrap.style.display = 'none';
+        }
+      }
+
+      try { playChiptuneBeep(); } catch (e) { }
+      setupActionLinks();
+    }
+
     function setupActionLinks() {
       const currentInputEl = document.getElementById('customAgendaInput');
       const currentInputVal = currentInputEl ? currentInputEl.value.trim() : "";
@@ -3913,6 +4077,19 @@
       const sweetNoteVal = sweetNoteEl ? sweetNoteEl.value.trim() : "";
 
       let fullWaText = "Hai seng! Aku mau banget ngedate sama kamu hari Minggu, 6 September nanti! 🥰✨ Makasih loh udah ngajak ngedatee. cantt wait to see youu💖";
+
+      // Include Dresscode Selection
+      let dresscodeDetailsText = selectedDresscode;
+      if (selectedDresscode === 'Couple') {
+        const coupleInput = document.getElementById('dresscodeCoupleInput');
+        const coupleVal = coupleInput ? coupleInput.value.trim() : "";
+        if (coupleVal) {
+          dresscodeDetailsText += ` (${coupleVal})`;
+        }
+      }
+      if (selectedDresscode) {
+        fullWaText += `\n\n👗 Dresscode: ${dresscodeDetailsText}`;
+      }
 
       if (allAgendas.length > 0) {
         fullWaText += "\n\n✨ Aku mauu:\n" + allAgendas.map((a, i) => `${i + 1}. ${a}`).join('\n');
@@ -3930,6 +4107,9 @@
 
       const title = encodeURIComponent("Kencan Spesial sama Shanzie 💖");
       let detailsStr = "Rencana kencan seru: Main arcade di Timezone & makan udon di Marugame Karawaci Supermall! 🥰";
+      if (selectedDresscode) {
+        detailsStr += " | Dresscode: " + dresscodeDetailsText;
+      }
       if (allAgendas.length > 0) {
         detailsStr += " + Agenda Tambahan Shanzie: " + allAgendas.join(', ');
       }
